@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Date: 2020-12-07
+  Time: 2020-12-07 11:28:16
+  Title: MyString
+  Details: MyString
+  Tag: MyString
+  Done: false
+
+two:
+  Date: 2020-12-07
+  Time: 2020-12-07 11:28:16
+  Title: MyString
+  Details: MyString
+  Tag: MyString
+  Done: false

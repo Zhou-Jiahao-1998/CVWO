@@ -1,0 +1,47 @@
+<%= form_with(model: item, local: true) do |form| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :Date %>
+    <%= form.date_select :Date, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :Time %>
+    <%= form.time_select :Time, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :Title %>
+    <%= form.text_field :Title, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :Details %>
+    <%= form.text_field :Details, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :Tag %>
+    <%= form.text_field :Tag, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :Done? %>
+    <%= form.check_box :Done, class:"form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-primary" %>
+  </div>
+<% end %>

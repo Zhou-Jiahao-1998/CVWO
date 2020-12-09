@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<h1>Item</h1>
+<ul class="list-group">
+  <li class="list-group-item"><strong>Date:</strong>
+    <%= @item.Date.strftime("%d / %m / %Y") %></li>
+  <li class="list-group-item"><strong>Time:</strong>
+    <%= @item.Time.strftime("%k : %M") %></li>
+  <li class="list-group-item"><strong>Title:</strong>
+    <%= @item.Title %></li>
+  <li class="list-group-item"><strong>Details:</strong>
+    <%= @item.Details %></li>
+  <li class="list-group-item"><strong>Tag:</strong>
+    <%= @item.Tag %></li>
+  <li class="list-group-item"><strong>Done?:</strong>
+    <%= @item.Done %></li>
+  <li class="list-group-item"><strong>Created at:</strong>
+    <%= @item.created_at.strftime("%d/%m/%Y" "%k:%M:%S") %></li>
+  <li class="list-group-item"><strong>Updated at:</strong>
+    <%= @item.updated_at.strftime("%d/%m/%Y" "%k:%M:%S") %></li>
+</ul>
+
+<br/>
+<%= link_to 'Edit', edit_item_path(@item), class:"btn btn-primary" %>
+<%= link_to 'Back', items_path, class:"btn btn-secondary"%>
