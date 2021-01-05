@@ -4,7 +4,7 @@ function Create() {
   return (
     <>
       <button class="btn btn-primary" type="submit">
-        Create Item
+        Create/Update Item
       </button>
     </>
   );

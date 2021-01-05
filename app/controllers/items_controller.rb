@@ -4,12 +4,14 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    if (params.has_key?(:Tag))
+    if (params.has_key?(:Tag)&&params.has_key?(:Done))
+      @items = Item.where(Tag: params[:Tag]).where(Done: params[:Done])
+    elsif (params.has_key?(:Tag))
       @items = Item.where(Tag: params[:Tag])
     elsif (params.has_key?(:Done))
       @items = Item.where(Done: params[:Done])
     else
-      @items = Item.all
+      @items = Item.all.sort_by{ |t| [t.Date, t.Time] }
     end
   end
 
