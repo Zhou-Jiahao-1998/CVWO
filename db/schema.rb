@@ -25,24 +25,4 @@ ActiveRecord::Schema.define(version: 2020_12_07_032816) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
-  create_table "lists", force: :cascade do |t|
-    t.date "Date"
-    t.time "Time"
-    t.string "Title"
-    t.string "Details"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "todolists", force: :cascade do |t|
-    t.date "Date"
-    t.time "Time"
-    t.string "Title"
-    t.string "Details"
-    t.boolean "Done"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
 end

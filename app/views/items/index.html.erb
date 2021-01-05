@@ -22,7 +22,7 @@
         <td><%= item.Time.strftime("%k:%M") %></td>
         <td><%= link_to item.Title, item %></td>
         <td><%= item.Details %></td>
-        <td><%= item.Tag %></td>
+        <td><%= link_to item.Tag, items_path(Tag:item.Tag) %></td>
         <td><%= item.Done %></td>
         <td><%= link_to 'Edit', edit_item_path(item), class:"btn btn-outline-success" %></td>
         <td><%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' } , class:"btn btn-outline-danger"%></td>
