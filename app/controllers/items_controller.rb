@@ -6,6 +6,8 @@ class ItemsController < ApplicationController
   def index
     if (params.has_key?(:Tag))
       @items = Item.where(Tag: params[:Tag])
+    elsif (params.has_key?(:Done))
+      @items = Item.where(Done: params[:Done])
     else
       @items = Item.all
     end
