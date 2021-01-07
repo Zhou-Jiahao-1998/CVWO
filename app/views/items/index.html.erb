@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-info" role="alert">
+    <%= notice%>
+  </div>
+<%end%>
 
 <%= react_component("ListName")%>
 <%= react_component("DropDown")%>

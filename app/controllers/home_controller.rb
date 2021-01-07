@@ -4,7 +4,4 @@ class HomeController < ApplicationController
 
   def about
   end
-
-  def haha
-  end
 end

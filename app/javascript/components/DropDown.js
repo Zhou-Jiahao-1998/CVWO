@@ -23,6 +23,18 @@ function GroupButton() {
         >
           Not Completed
         </a>
+        <a
+          href="http://localhost:3000/items/?Date"
+          class="btn btn-outline-primary"
+        >
+          Expired
+        </a>
+        <a
+          href="http://localhost:3000/items/?Time"
+          class="btn btn-outline-primary"
+        >
+          Today and upcoming
+        </a>
       </div>
     </>
   );

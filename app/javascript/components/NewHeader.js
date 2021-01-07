@@ -19,7 +19,7 @@ function NewHead() {
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/items">
-              Current List
+              To-do List
             </a>
           </li>
         </ul>

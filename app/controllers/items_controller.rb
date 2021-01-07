@@ -4,12 +4,16 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    if (params.has_key?(:Tag)&&params.has_key?(:Done))
-      @items = Item.where(Tag: params[:Tag]).where(Done: params[:Done])
+    if (params.has_key?(:Date))
+      @items = Item.where(Date: 1000000.days.ago...(Time.now)).sort_by{ |t| [t.Date, t.Time] }
+    elsif (params.has_key?(:Time))
+      @items = Item.where.not(Date: 1000000.days.ago...(Time.now)).sort_by{ |t| [t.Date, t.Time] }
+    elsif (params.has_key?(:Tag)&&params.has_key?(:Done))
+      @items = Item.where(Tag: params[:Tag]).where(Done: params[:Done]).sort_by{ |t| [t.Date, t.Time] }
     elsif (params.has_key?(:Tag))
-      @items = Item.where(Tag: params[:Tag])
+      @items = Item.where(Tag: params[:Tag]).sort_by{ |t| [t.Date, t.Time] }
     elsif (params.has_key?(:Done))
-      @items = Item.where(Done: params[:Done])
+      @items = Item.where(Done: params[:Done]).sort_by{ |t| [t.Date, t.Time] }
     else
       @items = Item.all.sort_by{ |t| [t.Date, t.Time] }
     end
