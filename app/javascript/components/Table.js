@@ -41,12 +41,15 @@ class ItemsContainer extends Component {
           {this.state.items.map((item) => {
             return (
               <tbody>
-                <td>{item.Date}</td>
-                <td>{item.Time}</td>
+                <td>
+                  {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
+                  {item.Date.substr(0, 4)}
+                </td>
+                <td>{item.Time.substr(11, 5)}</td>
                 <td>{item.Title}</td>
                 <td>{item.Details}</td>
                 <td>{item.Tag}</td>
-                <td>{item.Done}</td>
+                <td>{item.Done.toString()}</td>
               </tbody>
             );
           })}
