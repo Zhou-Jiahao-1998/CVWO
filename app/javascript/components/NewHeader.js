@@ -14,12 +14,12 @@ function NewHead() {
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/home/about">
-              About
+              React List
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/items">
-              To-do List
+              HTML ERB List
             </a>
           </li>
         </ul>

@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
   get 'home/index'
   get 'home/about'
-  resources :items
   root 'home#index'
-
+  namespace :api do
+    namespace :v1 do
+      resources :items
+    end
+  end
+  resources :items
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
