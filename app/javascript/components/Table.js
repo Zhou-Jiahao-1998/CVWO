@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Delete from "./Delete";
+import Display from "./Display";
+import Edit from "./Edit";
 
 class ItemsContainer extends Component {
   constructor(props) {
@@ -22,13 +25,28 @@ class ItemsContainer extends Component {
     this.getItems();
   }
 
+  deleteItem = (id) => {
+    axios
+      .delete(`/api/v1/items/${id}`)
+      .then((response) => {
+        const itemIndex = this.state.items.findIndex((x) => x.id === id);
+        const items = update(this.state.items, {
+          $splice: [[itemIndex, 1]],
+        });
+        this.setState({
+          items: items,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   render() {
     return (
       <div>
-        <table class="table table-striped table-hover">
+        <table class="table">
           <thead class="thead-light">
             <tr>
-              <th>Date (DD/MM/YY)</th>
+              <th>Date (DD/MM/YYYY)</th>
               <th>Time</th>
               <th>Title</th>
               <th>Details</th>
@@ -46,10 +64,18 @@ class ItemsContainer extends Component {
                   {item.Date.substr(0, 4)}
                 </td>
                 <td>{item.Time.substr(11, 5)}</td>
-                <td>{item.Title}</td>
+                <td>
+                  <Display title={item.Title} number={item.id.toString()} />
+                </td>
                 <td>{item.Details}</td>
                 <td>{item.Tag}</td>
                 <td>{item.Done.toString()}</td>
+                <td>
+                  <Edit />
+                </td>
+                <td>
+                  <Delete />
+                </td>
               </tbody>
             );
           })}

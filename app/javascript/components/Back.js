@@ -3,7 +3,7 @@ import React from "react";
 function Back() {
   return (
     <>
-      <a class="btn btn-secondary" href="/items" role="button">
+      <a class="btn btn-secondary" href="/home/about" role="button">
         Back
       </a>
     </>

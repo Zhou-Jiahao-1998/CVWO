@@ -3,7 +3,7 @@ import React from "react";
 function Edit() {
   return (
     <>
-      <a class="btn btn-primary" href="/edit" role="button">
+      <a class="btn btn-outline-success" role="button">
         Edit
       </a>
     </>
