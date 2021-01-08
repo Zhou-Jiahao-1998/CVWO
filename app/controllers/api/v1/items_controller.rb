@@ -1,17 +1,17 @@
 class Api::V1::ItemsController < Api::V1::BaseController
   def index
-    items = Item.order("created_at DESC")
+    items = Item.all.sort_by{ |t| [t.Date, t.Time] }
     render json: items
   end
 
   def create
-    items = Item.create(todo_param)
+    items = Item.create(item_param)
     render json: items
   end
 
   def update
     items = Item.find(params[:id])
-    items.update_attributes(todo_param)
+    items.update_attributes(item_param)
     render json: items
   end
 

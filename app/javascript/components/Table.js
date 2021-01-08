@@ -3,6 +3,7 @@ import axios from "axios";
 import Delete from "./Delete";
 import Display from "./Display";
 import Edit from "./Edit";
+import Tagging from "./Tagging";
 
 class ItemsContainer extends Component {
   constructor(props) {
@@ -68,7 +69,9 @@ class ItemsContainer extends Component {
                   <Display title={item.Title} number={item.id.toString()} />
                 </td>
                 <td>{item.Details}</td>
-                <td>{item.Tag}</td>
+                <td>
+                  <Tagging label={item.Tag} />
+                </td>
                 <td>{item.Done.toString()}</td>
                 <td>
                   <Edit />
