@@ -27,10 +27,6 @@ class ItemsContainer extends Component {
     this.getItems();
   }
 
-  deleteItem = () => {
-    axios.delete(`/api/v1/items/${id}`);
-  };
-
   render() {
     return (
       <div>
@@ -66,9 +62,7 @@ class ItemsContainer extends Component {
                 <td>
                   <Edit number={item.id} />
                 </td>
-                <td>
-                  <Delete number={item.id} />
-                </td>
+                <td>delete</td>
               </tbody>
             );
           })}
