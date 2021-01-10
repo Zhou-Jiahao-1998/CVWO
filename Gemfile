@@ -57,3 +57,4 @@ gem "react-rails", "~> 2.6"
 
 gem "bootstrap", "~> 4.5"
 gem 'responders'
+gem 'rack-cors', :require => 'rack/cors'

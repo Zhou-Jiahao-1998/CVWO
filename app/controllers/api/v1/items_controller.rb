@@ -4,6 +4,9 @@ class Api::V1::ItemsController < Api::V1::BaseController
     render json: items
   end
 
+  def show
+  end
+  
   def create
     items = Item.create(item_param)
     render json: items

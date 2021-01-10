@@ -1,6 +1,7 @@
 import React from "react";
+import axios from "axios";
 
-function Delete() {
+function Delete(props) {
   return (
     <>
       <a class="btn btn-outline-danger" role="button">

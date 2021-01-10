@@ -1,13 +1,13 @@
 import React from "react";
 
-function Edit(props) {
+function ShowEdit(props) {
   const link = "http://localhost:3000/items/" + props.number + "/edit";
   return (
     <>
-      <a class="btn btn-outline-success" role="button" href={link}>
+      <a class="btn btn-primary" role="button" href={link}>
         Edit
       </a>
     </>
   );
 }
-export default Edit;
+export default ShowEdit;

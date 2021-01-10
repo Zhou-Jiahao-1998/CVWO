@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import update from "immutability-helper";
 import Delete from "./Delete";
 import Display from "./Display";
 import Edit from "./Edit";
@@ -26,19 +27,8 @@ class ItemsContainer extends Component {
     this.getItems();
   }
 
-  deleteItem = (id) => {
-    axios
-      .delete(`/api/v1/items/${id}`)
-      .then((response) => {
-        const itemIndex = this.state.items.findIndex((x) => x.id === id);
-        const items = update(this.state.items, {
-          $splice: [[itemIndex, 1]],
-        });
-        this.setState({
-          items: items,
-        });
-      })
-      .catch((error) => console.log(error));
+  deleteItem = () => {
+    axios.delete(`/api/v1/items/${id}`);
   };
 
   render() {
@@ -74,10 +64,10 @@ class ItemsContainer extends Component {
                 </td>
                 <td>{item.Done.toString()}</td>
                 <td>
-                  <Edit />
+                  <Edit number={item.id} />
                 </td>
                 <td>
-                  <Delete />
+                  <Delete number={item.id} />
                 </td>
               </tbody>
             );

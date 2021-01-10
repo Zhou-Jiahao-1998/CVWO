@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
   get 'home/about'
+  get 'home/filter'
   root 'home#index'
   namespace :api do
     namespace :v1 do
