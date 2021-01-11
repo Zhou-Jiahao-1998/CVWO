@@ -26,7 +26,7 @@ class ReactShow extends Component {
 
   render() {
     const currentPage = window.location.href;
-    const currentID = currentPage.substr(28, 2);
+    const currentID = currentPage.substr(28);
     return (
       <>
         <h1>Item</h1>

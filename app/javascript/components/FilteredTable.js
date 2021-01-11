@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import update from "immutability-helper";
-import Delete from "./Delete";
 import Display from "./Display";
 import Edit from "./Edit";
 import Tagging from "./Tagging";
@@ -12,6 +10,7 @@ class ItemsContainer extends Component {
     this.state = {
       items: [],
     };
+    this.getItems();
   }
 
   getItems() {
@@ -27,9 +26,11 @@ class ItemsContainer extends Component {
     this.getItems();
   }
 
-  deleteItem = () => {
+  deleteItem(id) {
     axios.delete(`/api/v1/items/${id}`);
-  };
+    window.location.reload(false);
+    //alert(`/api?v1/items/${id}`);
+  }
 
   render() {
     const currentPage = window.location.href;
@@ -57,23 +58,43 @@ class ItemsContainer extends Component {
                 return (
                   <tbody>
                     <td>
-                      {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
-                      {x.Date.substr(0, 4)}
+                      <a class="btn btn-white" role="button" disabled>
+                        {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
+                        {x.Date.substr(0, 4)}
+                      </a>
                     </td>
-                    <td>{x.Time.substr(11, 5)}</td>
+                    <td>
+                      <a class="btn btn-white" role="button" disabled>
+                        {x.Time.substr(11, 5)}
+                      </a>
+                    </td>
                     <td>
                       <Display title={x.Title} number={x.id.toString()} />
                     </td>
-                    <td>{x.Details}</td>
+                    <td>
+                      <a class="btn btn-white" role="button" disabled>
+                        {x.Details}
+                      </a>
+                    </td>
                     <td>
                       <Tagging label={x.Tag} />
                     </td>
-                    <td>{x.Done.toString()}</td>
+                    <td>
+                      <a class="btn btn-white" role="button" disabled>
+                        {x.Done.toString()}
+                      </a>
+                    </td>
                     <td>
                       <Edit number={x.id} />
                     </td>
                     <td>
-                      <Delete number={x.id} />
+                      <a
+                        class="btn btn-outline-danger"
+                        role="button"
+                        onClick={() => this.deleteItem(x.id)}
+                      >
+                        Delete
+                      </a>
                     </td>
                   </tbody>
                 );
