@@ -58,32 +58,18 @@ class ItemsContainer extends Component {
                 return (
                   <tbody>
                     <td>
-                      <a class="btn btn-white" role="button" disabled>
-                        {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
-                        {x.Date.substr(0, 4)}
-                      </a>
+                      {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
+                      {x.Date.substr(0, 4)}
                     </td>
-                    <td>
-                      <a class="btn btn-white" role="button" disabled>
-                        {x.Time.substr(11, 5)}
-                      </a>
-                    </td>
+                    <td>{x.Time.substr(11, 5)}</td>
                     <td>
                       <Display title={x.Title} number={x.id.toString()} />
                     </td>
-                    <td>
-                      <a class="btn btn-white" role="button" disabled>
-                        {x.Details}
-                      </a>
-                    </td>
+                    <td>{x.Details}</td>
                     <td>
                       <Tagging label={x.Tag} />
                     </td>
-                    <td>
-                      <a class="btn btn-white" role="button" disabled>
-                        {x.Done.toString()}
-                      </a>
-                    </td>
+                    <td>{x.Done.toString()}</td>
                     <td>
                       <Edit number={x.id} />
                     </td>

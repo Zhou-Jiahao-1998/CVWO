@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import update from "immutability-helper";
 import ShowEdit from "./ShowEdit";
 
 class ReactShow extends Component {

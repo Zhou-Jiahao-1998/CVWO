@@ -38,9 +38,9 @@ class ItemsContainer extends Component {
         <table class="table">
           <thead class="thead-light">
             <tr>
-              <th>Date (DD/MM/YYYY)</th>
+              <th>Date(DD/MM/YYYY)</th>
               <th>Time</th>
-              <th>Title</th>
+              <th>Title </th>
               <th>Details</th>
               <th>Tag</th>
               <th>Done?</th>
@@ -52,32 +52,18 @@ class ItemsContainer extends Component {
             return (
               <tbody>
                 <td>
-                  <a class="btn btn-white" role="button" disabled>
-                    {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
-                    {item.Date.substr(0, 4)}
-                  </a>
+                  {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
+                  {item.Date.substr(0, 4)}
                 </td>
-                <td>
-                  <a class="btn btn-white" role="button" disabled>
-                    {item.Time.substr(11, 5)}
-                  </a>
-                </td>
+                <td>{item.Time.substr(11, 5)}</td>
                 <td>
                   <Display title={item.Title} number={item.id.toString()} />
                 </td>
-                <td>
-                  <a class="btn btn-white" role="button" disabled>
-                    {item.Details}
-                  </a>
-                </td>
+                <td>{item.Details}</td>
                 <td>
                   <Tagging label={item.Tag} />
                 </td>
-                <td>
-                  <a class="btn btn-white" role="button" disabled>
-                    {item.Done.toString()}
-                  </a>
-                </td>
+                <td>{item.Done.toString()}</td>
                 <td>
                   <Edit number={item.id} />
                 </td>
