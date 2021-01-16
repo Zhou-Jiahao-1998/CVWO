@@ -27,9 +27,10 @@ class ItemsContainer extends Component {
   }
 
   deleteItem(id) {
-    axios.delete(`/api/v1/items/${id}`);
-    window.location.reload(false);
-    //alert(`/api?v1/items/${id}`);
+    if (window.confirm("Are you sure you want to delete this entry?")) {
+      axios.delete(`/api/v1/items/${id}`);
+      window.location.reload(false);
+    }
   }
 
   render() {
