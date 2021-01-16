@@ -1,6 +1,7 @@
 class Api::V1::ItemsController < Api::V1::BaseController
   def index
     items = Item.all.sort_by{ |t| [t.Date, t.Time] }
+    #items = Item.all
     render json: items
   end
 
@@ -26,7 +27,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
 
   private
 
-  def item_params
+  def item_param
     params.require(:item).permit(:Date, :Time, :Title, :Details, :Tag, :Done)
   end
 end

@@ -3,7 +3,7 @@ import React from "react";
 function NewItem() {
   return (
     <>
-      <a class="btn btn-primary" href="/items/new" role="button">
+      <a class="btn btn-primary" href="/" role="button">
         New Item
       </a>
     </>
