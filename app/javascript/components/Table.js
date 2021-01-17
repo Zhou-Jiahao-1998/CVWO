@@ -48,36 +48,38 @@ class ItemsContainer extends Component {
             </tr>
           </thead>
 
-          {this.state.items.map((item) => {
-            return (
-              <tbody>
-                <td>
-                  {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
-                  {item.Date.substr(0, 4)}
-                </td>
-                <td>{item.Time.substr(11, 5)}</td>
-                <td>
-                  <Display title={item.Title} number={item.id.toString()} />
-                </td>
-                <td>
-                  <Tagging label={item.Tag} />
-                </td>
-                <td>{item.Done.toString()}</td>
-                <td>
-                  <Edit number={item.id} />
-                </td>
-                <td>
-                  <a
-                    class="btn btn-outline-danger"
-                    role="button"
-                    onClick={() => this.deleteItem(item.id)}
-                  >
-                    Delete
-                  </a>
-                </td>
-              </tbody>
-            );
-          })}
+          {this.state.items
+            .filter((item) => item.Done == false)
+            .map((item) => {
+              return (
+                <tbody>
+                  <td>
+                    {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
+                    {item.Date.substr(0, 4)}
+                  </td>
+                  <td>{item.Time.substr(11, 5)}</td>
+                  <td>
+                    <Display title={item.Title} number={item.id.toString()} />
+                  </td>
+                  <td>
+                    <Tagging label={item.Tag} />
+                  </td>
+                  <td>{item.Done.toString()}</td>
+                  <td>
+                    <Edit number={item.id} />
+                  </td>
+                  <td>
+                    <a
+                      class="btn btn-outline-danger"
+                      role="button"
+                      onClick={() => this.deleteItem(item.id)}
+                    >
+                      Delete
+                    </a>
+                  </td>
+                </tbody>
+              );
+            })}
         </table>
       </div>
     );
