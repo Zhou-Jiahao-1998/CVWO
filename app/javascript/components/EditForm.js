@@ -77,7 +77,7 @@ class EditForm extends Component {
 
   insertData(data, id) {
     axios.patch(`/api/v1/items/${id}`, data).then((res) => console.log(res));
-    window.location.replace("http://localhost:3000/home/about");
+    window.location.replace("http://localhost:3000/items");
   }
 
   render() {
@@ -101,7 +101,6 @@ class EditForm extends Component {
                       <option>{y}</option>
                     ))}
                   </select>
-                  <div class="invalid-tooltip">Please select a day.</div>
                 </div>
                 <div class="form-group col-md-1">
                   <select id="inputMonth" class="form-control">
@@ -152,8 +151,7 @@ class EditForm extends Component {
                     type="title"
                     class="form-control"
                     id="inputTitle"
-                    placeholder="Title"
-                    value={x.Title}
+                    placeholder={x.Title}
                   ></input>
                 </div>
                 <div class="form-group col-md-2">
@@ -162,8 +160,7 @@ class EditForm extends Component {
                     type="tag"
                     class="form-control"
                     id="inputTag"
-                    placeholder="Tag"
-                    value={x.Tag}
+                    placeholder={x.Tag}
                   ></input>
                 </div>
               </div>
@@ -173,9 +170,8 @@ class EditForm extends Component {
                   type="text"
                   class="form-control"
                   id="inputDetail"
-                  placeholder="What to do..."
                   rows="3"
-                  value={x.Details}
+                  placeholder={x.Details}
                 ></textarea>
               </div>
               <label>Done?</label>
@@ -203,9 +199,15 @@ class EditForm extends Component {
                 document.getElementById("inputDay").value,
                 document.getElementById("inputHour").value,
                 document.getElementById("inputMin").value,
-                document.getElementById("inputTitle").value,
-                document.getElementById("inputDetail").value,
-                document.getElementById("inputTag").value,
+                document.getElementById("inputTitle").value == ""
+                  ? document.getElementById("inputTitle").placeholder
+                  : document.getElementById("inputTitle").value,
+                document.getElementById("inputDetail").value == ""
+                  ? document.getElementById("inputDetail").placeholder
+                  : document.getElementById("inputDetail").value,
+                document.getElementById("inputTag").value == ""
+                  ? document.getElementById("inputTag").placeholder
+                  : document.getElementById("inputTag").value,
                 document.getElementById("inputDone").value,
               ],
               currentID

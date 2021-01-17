@@ -24,7 +24,7 @@ class Form extends Component {
 
   insertData(data) {
     axios.post(`/api/v1/items.json`, data).then((res) => console.log(res));
-    window.location.replace("http://localhost:3000/home/about");
+    window.location.replace("http://localhost:3000/items");
   }
 
   render() {

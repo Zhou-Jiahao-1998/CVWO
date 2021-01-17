@@ -49,7 +49,6 @@ class ItemsContainer extends Component {
                 <th>Date (DD/MM/YYYY)</th>
                 <th>Time</th>
                 <th>Title</th>
-                <th>Details</th>
                 <th>Tag</th>
                 <th>Done?</th>
                 <th colspan="3"></th>
@@ -69,7 +68,6 @@ class ItemsContainer extends Component {
                     <td>
                       <Display title={x.Title} number={x.id.toString()} />
                     </td>
-                    <td>{x.Details}</td>
                     <td>
                       <Tagging label={x.Tag} />
                     </td>
