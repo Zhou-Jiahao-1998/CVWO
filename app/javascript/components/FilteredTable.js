@@ -3,6 +3,7 @@ import axios from "axios";
 import Display from "./Display";
 import Edit from "./Edit";
 import Tagging from "./Tagging";
+import Back from "./Back";
 
 class ItemsContainer extends Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class ItemsContainer extends Component {
     return (
       <>
         <h1>Items with Tag: {currentID}</h1>
+        <Back />
+        <br />
+        <br />
         <div>
           <table class="table">
             <thead class="thead-light">
