@@ -4,7 +4,7 @@ function Edit(props) {
   const link = "http://localhost:3000/items/" + props.number + "/edit";
   return (
     <>
-      <a class="btn btn-outline-success" role="button" href={link}>
+      <a className="btn btn-outline-success" role="button" href={link}>
         Edit
       </a>
     </>

@@ -38,15 +38,15 @@ class CompletedTable extends Component {
       <>
         <h1>Completed Items</h1>
         <div>
-          <table class="table">
-            <thead class="thead-light">
+          <table className="table">
+            <thead className="thead-light">
               <tr>
                 <th>Date(DD/MM/YYYY)</th>
                 <th>Time</th>
                 <th>Title </th>
                 <th>Tag</th>
                 <th>Done?</th>
-                <th colspan="3"></th>
+                <th colSpan="3"></th>
               </tr>
             </thead>
 
@@ -55,8 +55,8 @@ class CompletedTable extends Component {
               .filter((item) => item.Done == true)
               .map((item) => {
                 return (
-                  <>
-                    <tbody>
+                  <tbody key={item.id}>
+                    <tr>
                       <td>
                         {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
                         {item.Date.substr(0, 4)}
@@ -77,15 +77,15 @@ class CompletedTable extends Component {
                       </td>
                       <td>
                         <a
-                          class="btn btn-outline-danger"
+                          className="btn btn-outline-danger"
                           role="button"
                           onClick={() => this.deleteItem(item.id)}
                         >
                           Delete
                         </a>
                       </td>
-                    </tbody>
-                  </>
+                    </tr>
+                  </tbody>
                 );
               })}
           </table>

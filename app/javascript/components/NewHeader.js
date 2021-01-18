@@ -2,23 +2,23 @@ import React from "react";
 
 function NewHead() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand">My App</a>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a className="navbar-brand">My App</a>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="/">
               Home
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/items">
+          <li className="nav-item">
+            <a className="nav-link active" href="/items">
               To-Do List
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/home/about">
+          <li className="nav-item">
+            <a className="nav-link active" href="/home/about">
               Completed items
             </a>
           </li>

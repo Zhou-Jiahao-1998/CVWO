@@ -32,10 +32,10 @@ class ReactShow extends Component {
           {this.state.items
             .filter((item) => item.id.toString() == currentID)
             .map((x) => (
-              <>
+              <div key={x.id}>
                 <h1>{x.Title}</h1>
-                <ul class="list-group">
-                  <li class="list-group-item">
+                <ul className="list-group">
+                  <li className="list-group-item">
                     <strong>Date: </strong>
                     {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
                     {x.Date.substr(0, 4)}
@@ -46,12 +46,12 @@ class ReactShow extends Component {
                     <strong> Done?: </strong>
                     {x.Done.toString()}
                   </li>
-                  <li class="list-group-item">
+                  <li className="list-group-item">
                     <strong>Details: </strong>
                     {x.Details}
                   </li>
                 </ul>
-              </>
+              </div>
             ))}
         </div>
         <br />

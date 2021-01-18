@@ -43,15 +43,15 @@ class ItemsContainer extends Component {
         <br />
         <br />
         <div>
-          <table class="table">
-            <thead class="thead-light">
+          <table className="table">
+            <thead className="thead-light">
               <tr>
                 <th>Date (DD/MM/YYYY)</th>
                 <th>Time</th>
                 <th>Title</th>
                 <th>Tag</th>
                 <th>Done?</th>
-                <th colspan="3"></th>
+                <th colSpan="3"></th>
               </tr>
             </thead>
 
@@ -59,31 +59,33 @@ class ItemsContainer extends Component {
               .filter((item) => item.Tag == currentID)
               .map((x) => {
                 return (
-                  <tbody>
-                    <td>
-                      {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
-                      {x.Date.substr(0, 4)}
-                    </td>
-                    <td>{x.Time.substr(11, 5)}</td>
-                    <td>
-                      <Display title={x.Title} number={x.id.toString()} />
-                    </td>
-                    <td>
-                      <Tagging label={x.Tag} />
-                    </td>
-                    <td>{x.Done.toString()}</td>
-                    <td>
-                      <Edit number={x.id} />
-                    </td>
-                    <td>
-                      <a
-                        class="btn btn-outline-danger"
-                        role="button"
-                        onClick={() => this.deleteItem(x.id)}
-                      >
-                        Delete
-                      </a>
-                    </td>
+                  <tbody key={x.id}>
+                    <tr>
+                      <td>
+                        {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
+                        {x.Date.substr(0, 4)}
+                      </td>
+                      <td>{x.Time.substr(11, 5)}</td>
+                      <td>
+                        <Display title={x.Title} number={x.id.toString()} />
+                      </td>
+                      <td>
+                        <Tagging label={x.Tag} />
+                      </td>
+                      <td>{x.Done.toString()}</td>
+                      <td>
+                        <Edit number={x.id} />
+                      </td>
+                      <td>
+                        <a
+                          className="btn btn-outline-danger"
+                          role="button"
+                          onClick={() => this.deleteItem(x.id)}
+                        >
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
                   </tbody>
                 );
               })}

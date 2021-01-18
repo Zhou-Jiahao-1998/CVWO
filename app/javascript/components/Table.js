@@ -65,15 +65,15 @@ class ItemsContainer extends Component {
   render() {
     return (
       <div>
-        <table class="table">
-          <thead class="thead-light">
+        <table className="table">
+          <thead className="thead-light">
             <tr>
               <th>Date(DD/MM/YYYY)</th>
               <th>Time</th>
-              <th>Title </th>
+              <th>Title (Click to view details)</th>
               <th>Tag</th>
               <th>Done?</th>
-              <th colspan="3"></th>
+              <th colSpan="3"></th>
             </tr>
           </thead>
 
@@ -81,64 +81,66 @@ class ItemsContainer extends Component {
             .filter((item) => item.Done == false)
             .map((item) => {
               return (
-                <tbody>
-                  {overDue(
-                    Number(item.Date.substr(0, 4)),
-                    Number(item.Date.substr(5, 2)),
-                    Number(item.Date.substr(8, 2)),
-                    Number(item.Time.substr(11, 2)),
-                    Number(item.Time.substr(14, 2))
-                  ) ? (
-                    <td class="text-danger">
-                      {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
-                      {item.Date.substr(0, 4)}
-                    </td>
-                  ) : (
+                <tbody key={item.id}>
+                  <tr>
+                    {overDue(
+                      Number(item.Date.substr(0, 4)),
+                      Number(item.Date.substr(5, 2)),
+                      Number(item.Date.substr(8, 2)),
+                      Number(item.Time.substr(11, 2)),
+                      Number(item.Time.substr(14, 2))
+                    ) ? (
+                      <td className="text-danger">
+                        {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
+                        {item.Date.substr(0, 4)}
+                      </td>
+                    ) : (
+                      <td>
+                        {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
+                        {item.Date.substr(0, 4)}
+                      </td>
+                    )}
+                    {overDue(
+                      Number(item.Date.substr(0, 4)),
+                      Number(item.Date.substr(5, 2)),
+                      Number(item.Date.substr(8, 2)),
+                      Number(item.Time.substr(11, 2)),
+                      Number(item.Time.substr(14, 2))
+                    ) ? (
+                      <td className="text-danger">{item.Time.substr(11, 5)}</td>
+                    ) : (
+                      <td>{item.Time.substr(11, 5)}</td>
+                    )}
                     <td>
-                      {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
-                      {item.Date.substr(0, 4)}
+                      <Display title={item.Title} number={item.id.toString()} />
                     </td>
-                  )}
-                  {overDue(
-                    Number(item.Date.substr(0, 4)),
-                    Number(item.Date.substr(5, 2)),
-                    Number(item.Date.substr(8, 2)),
-                    Number(item.Time.substr(11, 2)),
-                    Number(item.Time.substr(14, 2))
-                  ) ? (
-                    <td class="text-danger">{item.Time.substr(11, 5)}</td>
-                  ) : (
-                    <td>{item.Time.substr(11, 5)}</td>
-                  )}
-                  <td>
-                    <Display title={item.Title} number={item.id.toString()} />
-                  </td>
-                  <td>
-                    <Tagging label={item.Tag} />
-                  </td>
-                  {overDue(
-                    Number(item.Date.substr(0, 4)),
-                    Number(item.Date.substr(5, 2)),
-                    Number(item.Date.substr(8, 2)),
-                    Number(item.Time.substr(11, 2)),
-                    Number(item.Time.substr(14, 2))
-                  ) ? (
-                    <td class="text-danger">{item.Done.toString()}</td>
-                  ) : (
-                    <td>{item.Done.toString()}</td>
-                  )}
-                  <td>
-                    <Edit number={item.id} />
-                  </td>
-                  <td>
-                    <a
-                      class="btn btn-outline-danger"
-                      role="button"
-                      onClick={() => this.deleteItem(item.id)}
-                    >
-                      Delete
-                    </a>
-                  </td>
+                    <td>
+                      <Tagging label={item.Tag} />
+                    </td>
+                    {overDue(
+                      Number(item.Date.substr(0, 4)),
+                      Number(item.Date.substr(5, 2)),
+                      Number(item.Date.substr(8, 2)),
+                      Number(item.Time.substr(11, 2)),
+                      Number(item.Time.substr(14, 2))
+                    ) ? (
+                      <td className="text-danger">{item.Done.toString()}</td>
+                    ) : (
+                      <td>{item.Done.toString()}</td>
+                    )}
+                    <td>
+                      <Edit number={item.id} />
+                    </td>
+                    <td>
+                      <a
+                        className="btn btn-outline-danger"
+                        role="button"
+                        onClick={() => this.deleteItem(item.id)}
+                      >
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
                 </tbody>
               );
             })}

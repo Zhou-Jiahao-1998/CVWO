@@ -89,107 +89,99 @@ class EditForm extends Component {
         {this.state.items
           .filter((item) => item.id.toString() == currentID)
           .map((x) => (
-            <form>
+            <form key={x.id}>
               <label>Date:</label>
-              <div class="form-row">
-                <div class="form-group col-md-1">
-                  <select id="inputDay" class="form-control" required>
-                    <option selected disabled>
-                      {x.Date.substr(8, 2)}
-                    </option>
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <select id="inputDay" className="form-control" required>
+                    <option defaultValue>{x.Date.substr(8, 2)}</option>
                     {helperDay.map((y) => (
-                      <option>{y}</option>
+                      <option key={y}>{y}</option>
                     ))}
                   </select>
                 </div>
-                <div class="form-group col-md-1">
-                  <select id="inputMonth" class="form-control">
-                    <option selected disabled>
+                <div className="form-group col-md-1">
+                  <select id="inputMonth" className="form-control">
+                    <option defaultValue>
                       {helperMonth[Number(x.Date.substr(5, 2)) - 1]}
                     </option>
                     {helperMonth.map((y) => (
-                      <option>{y}</option>
+                      <option key={y}>{y}</option>
                     ))}
                   </select>
                 </div>
-                <div class="form-group col-md-1">
-                  <select id="inputYear" class="form-control">
-                    <option selected>{x.Date.substr(0, 4)}</option>
+                <div className="form-group col-md-1">
+                  <select id="inputYear" className="form-control">
+                    <option defaultValue>{x.Date.substr(0, 4)}</option>
                     {helperYear.map((y) => (
-                      <option>{y}</option>
+                      <option key={y}>{y}</option>
                     ))}
                   </select>
                 </div>
               </div>
               <label>Time (24hr):</label>
-              <div class="form-row">
-                <div class="form-group col-md-1">
-                  <select id="inputHour" class="form-control">
-                    <option selected disabled>
-                      {x.Time.substr(11, 2)}
-                    </option>
-                    {helperHour.map((x) => (
-                      <option>{x - 1}</option>
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <select id="inputHour" className="form-control">
+                    <option defaultValue>{x.Time.substr(11, 2)}</option>
+                    {helperHour.map((y) => (
+                      <option key={y}>{y - 1}</option>
                     ))}
                   </select>
                 </div>
-                <div class="form-group col-md-1">
-                  <select id="inputMin" class="form-control">
-                    <option selected disabled>
-                      {x.Time.substr(14, 2)}
-                    </option>
-                    {helperMin.map((x) => (
-                      <option>{x - 1}</option>
+                <div className="form-group col-md-1">
+                  <select id="inputMin" className="form-control">
+                    <option defaultValue>{x.Time.substr(14, 2)}</option>
+                    {helperMin.map((y) => (
+                      <option key={y}>{y - 1}</option>
                     ))}
                   </select>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label for="inputTitle">Title:</label>
+              <div className="form-row">
+                <div className="form-group col-md-4">
+                  <label>Title:</label>
                   <input
                     type="title"
-                    class="form-control"
+                    className="form-control"
                     id="inputTitle"
                     placeholder={x.Title}
                   ></input>
                 </div>
-                <div class="form-group col-md-2">
-                  <label for="inputTag">Tag:</label>
+                <div className="form-group col-md-2">
+                  <label>Tag:</label>
                   <input
                     type="tag"
-                    class="form-control"
+                    className="form-control"
                     id="inputTag"
                     placeholder={x.Tag}
                   ></input>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="inputDetail">Details:</label>
+              <div className="form-group">
+                <label>Details:</label>
                 <textarea
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="inputDetail"
                   rows="3"
                   placeholder={x.Details}
                 ></textarea>
               </div>
               <label>Done?</label>
-              <div class="form-row">
-                <div class="form-group col-md-1">
-                  <select id="inputDone" class="form-control">
-                    <option selected disabled>
-                      {x.Done.toString()}
-                    </option>
-                    <option>true</option>
-                    <option>false</option>
+              <div className="form-row">
+                <div className="form-group col-md-1">
+                  <select id="inputDone" className="form-control">
+                    <option defaultValue>{x.Done.toString()}</option>
+                    <option key="true">true</option>
+                    <option key="false">false</option>
                   </select>
                 </div>
               </div>
             </form>
           ))}
         <button
-          class="btn btn-primary"
+          className="btn btn-primary"
           type="submit"
           onClick={() =>
             this.packnsend(

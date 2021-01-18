@@ -4,7 +4,7 @@ function ShowEdit(props) {
   const link = "http://localhost:3000/items/" + props.number + "/edit";
   return (
     <>
-      <a class="btn btn-primary" role="button" href={link}>
+      <a className="btn btn-primary" role="button" href={link}>
         Edit
       </a>
     </>

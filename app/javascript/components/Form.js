@@ -71,102 +71,94 @@ class Form extends Component {
       <>
         <form>
           <label>Date:</label>
-          <div class="form-row">
-            <div class="form-group col-md-1">
-              <select id="inputDay" class="form-control" required>
-                <option selected disabled>
-                  {currentDay}
-                </option>
+          <div className="form-row">
+            <div className="form-group col-md-1">
+              <select id="inputDay" className="form-control" required>
+                <option defaultValue>{currentDay}</option>
                 {helperDay.map((x) => (
-                  <option>{x}</option>
+                  <option key={x}>{x}</option>
                 ))}
               </select>
-              <div class="invalid-tooltip">Please select a day.</div>
+              <div className="invalid-tooltip">Please select a day.</div>
             </div>
-            <div class="form-group col-md-1">
-              <select id="inputMonth" class="form-control">
-                <option selected disabled>
-                  {currentMonth}
-                </option>
+            <div className="form-group col-md-1">
+              <select id="inputMonth" className="form-control">
+                <option defaultValue>{currentMonth}</option>
                 {helperMonth.map((x) => (
-                  <option>{x}</option>
+                  <option key={x}>{x}</option>
                 ))}
               </select>
             </div>
-            <div class="form-group col-md-1">
-              <select id="inputYear" class="form-control">
-                <option selected>{currentYear}</option>
+            <div className="form-group col-md-1">
+              <select id="inputYear" className="form-control">
+                <option defaultValue>{currentYear}</option>
                 {helperYear.map((x) => (
-                  <option>{x}</option>
+                  <option key={x}>{x}</option>
                 ))}
               </select>
             </div>
           </div>
           <label>Time (24hr):</label>
-          <div class="form-row">
-            <div class="form-group col-md-1">
-              <select id="inputHour" class="form-control">
-                <option selected disabled>
-                  {currentHour}
-                </option>
+          <div className="form-row">
+            <div className="form-group col-md-1">
+              <select id="inputHour" className="form-control">
+                <option defaultValue>{currentHour}</option>
                 {helperHour.map((x) => (
-                  <option>{x - 1}</option>
+                  <option key={x}>{x - 1}</option>
                 ))}
               </select>
             </div>
-            <div class="form-group col-md-1">
-              <select id="inputMin" class="form-control">
-                <option selected disabled>
-                  {currentMin}
-                </option>
+            <div className="form-group col-md-1">
+              <select id="inputMin" className="form-control">
+                <option defaultValue>{currentMin}</option>
                 {helperMin.map((x) => (
-                  <option>{x - 1}</option>
+                  <option key={x}>{x - 1}</option>
                 ))}
               </select>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              <label for="inputTitle">Title:</label>
+          <div className="form-row">
+            <div className="form-group col-md-4">
+              <label>Title:</label>
               <input
                 type="title"
-                class="form-control"
+                className="form-control"
                 id="inputTitle"
                 placeholder="Title"
               ></input>
             </div>
-            <div class="form-group col-md-2">
-              <label for="inputTag">Tag:</label>
+            <div className="form-group col-md-2">
+              <label>Tag:</label>
               <input
                 type="tag"
-                class="form-control"
+                className="form-control"
                 id="inputTag"
                 placeholder="Tag"
               ></input>
             </div>
           </div>
-          <div class="form-group">
-            <label for="inputDetail">Details:</label>
+          <div className="form-group">
+            <label>Details:</label>
             <textarea
               type="text"
-              class="form-control"
+              className="form-control"
               id="inputDetail"
               placeholder="What to do..."
               rows="3"
             ></textarea>
           </div>
           <label>Done?</label>
-          <div class="form-row">
-            <div class="form-group col-md-1">
-              <select id="inputDone" class="form-control">
-                <option selected>false</option>
+          <div className="form-row">
+            <div className="form-group col-md-1">
+              <select id="inputDone" className="form-control">
+                <option defaultValue>false</option>
                 <option>true</option>
               </select>
             </div>
           </div>
         </form>
         <button
-          class="btn btn-primary"
+          className="btn btn-primary"
           type="submit"
           onClick={() =>
             this.packnsend([
