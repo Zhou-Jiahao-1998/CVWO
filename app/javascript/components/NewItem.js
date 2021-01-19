@@ -1,9 +1,10 @@
 import React from "react";
 
-function NewItem() {
+function NewItem(props) {
+  const link = "/items/new?" + props.name;
   return (
     <>
-      <a className="btn btn-primary" href="/items/new" role="button">
+      <a className="btn btn-primary" href={link} role="button">
         New Item
       </a>
     </>

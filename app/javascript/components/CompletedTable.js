@@ -43,7 +43,8 @@ class CompletedTable extends Component {
               <tr>
                 <th>Date(DD/MM/YYYY)</th>
                 <th>Time</th>
-                <th>Title </th>
+                <th>Title</th>
+                <th>Details</th>
                 <th>Tag</th>
                 <th>Done?</th>
                 <th colSpan="3"></th>
@@ -52,7 +53,10 @@ class CompletedTable extends Component {
 
             {this.state.items
               .reverse()
-              .filter((item) => item.Done == true)
+              .filter(
+                (item) =>
+                  item.Done == true && item.user_name == this.props.username
+              )
               .map((item) => {
                 return (
                   <tbody key={item.id}>
@@ -62,12 +66,8 @@ class CompletedTable extends Component {
                         {item.Date.substr(0, 4)}
                       </td>
                       <td>{item.Time.substr(11, 5)}</td>
-                      <td>
-                        <Display
-                          title={item.Title}
-                          number={item.id.toString()}
-                        />
-                      </td>
+                      <td>{item.Title}</td>
+                      <td>{item.Details}</td>
                       <td>
                         <Tagging label={item.Tag} />
                       </td>

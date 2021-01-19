@@ -10,7 +10,7 @@ class Form extends Component {
     return result;
   }
 
-  packnsend(input) {
+  packnsend(input, name) {
     const result = {
       Date: input[0] + "-" + input[1] + "-" + input[2],
       Time: input[3] + ":" + input[4],
@@ -18,13 +18,14 @@ class Form extends Component {
       Details: input[6],
       Tag: input[7],
       Done: input[8],
+      user_name: input[9],
     };
-    this.insertData(result);
+    this.insertData(result, name);
   }
 
-  insertData(data) {
+  insertData(data, name) {
     axios.post(`/api/v1/items.json`, data).then((res) => console.log(res));
-    window.location.replace("http://localhost:3000/items");
+    window.location.replace(`http://localhost:3000/items?user=${name}`);
   }
 
   render() {
@@ -67,6 +68,10 @@ class Form extends Component {
     const helperYear = this.oneToN(10).map((x) => x + currentYear);
     const helperHour = this.oneToN(24);
     const helperMin = this.oneToN(60);
+
+    const currentPage = window.location.href;
+    const currentID = currentPage.substr(32);
+
     return (
       <>
         <form>
@@ -155,23 +160,34 @@ class Form extends Component {
                 <option>true</option>
               </select>
             </div>
+            <div className="form-group col-md-2">
+              <input
+                type="username"
+                className="form-control"
+                id="username"
+              ></input>
+            </div>
           </div>
         </form>
         <button
           className="btn btn-primary"
           type="submit"
           onClick={() =>
-            this.packnsend([
-              document.getElementById("inputYear").value,
-              monthConvert[document.getElementById("inputMonth").value],
-              document.getElementById("inputDay").value,
-              document.getElementById("inputHour").value,
-              document.getElementById("inputMin").value,
-              document.getElementById("inputTitle").value,
-              document.getElementById("inputDetail").value,
-              document.getElementById("inputTag").value,
-              document.getElementById("inputDone").value,
-            ])
+            this.packnsend(
+              [
+                document.getElementById("inputYear").value,
+                monthConvert[document.getElementById("inputMonth").value],
+                document.getElementById("inputDay").value,
+                document.getElementById("inputHour").value,
+                document.getElementById("inputMin").value,
+                document.getElementById("inputTitle").value,
+                document.getElementById("inputDetail").value,
+                document.getElementById("inputTag").value,
+                document.getElementById("inputDone").value,
+                document.getElementById("username").value,
+              ],
+              currentID
+            )
           }
         >
           Create

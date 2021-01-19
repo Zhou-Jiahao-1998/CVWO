@@ -14,12 +14,12 @@ function NewHead() {
           </li>
           <li className="nav-item">
             <a className="nav-link active" href="/items">
-              To-Do List
+              Items
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link active" href="/home/about">
-              Completed items
+            <a className="nav-link active" href="/logins">
+              Users
             </a>
           </li>
         </ul>

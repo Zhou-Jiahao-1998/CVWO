@@ -3,6 +3,7 @@ import axios from "axios";
 import Display from "./Display";
 import Edit from "./Edit";
 import Tagging from "./Tagging";
+import NewItem from "./NewItem";
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -65,12 +66,17 @@ class ItemsContainer extends Component {
   render() {
     return (
       <div>
+        <h1>{this.props.username}'s To-do List</h1>
+        <NewItem username={this.props.username} />
+        <br />
+        <br />
         <table className="table">
           <thead className="thead-light">
             <tr>
               <th>Date(DD/MM/YYYY)</th>
               <th>Time</th>
-              <th>Title (Click to view details)</th>
+              <th>Title</th>
+              <th>Details</th>
               <th>Tag</th>
               <th>Done?</th>
               <th colSpan="3"></th>
@@ -78,7 +84,10 @@ class ItemsContainer extends Component {
           </thead>
 
           {this.state.items
-            .filter((item) => item.Done == false)
+            .filter(
+              (item) =>
+                item.Done == false && item.user_name == this.props.username
+            )
             .map((item) => {
               return (
                 <tbody key={item.id}>
@@ -111,9 +120,8 @@ class ItemsContainer extends Component {
                     ) : (
                       <td>{item.Time.substr(11, 5)}</td>
                     )}
-                    <td>
-                      <Display title={item.Title} number={item.id.toString()} />
-                    </td>
+                    <td>{item.Title}</td>
+                    <td>{item.Details}</td>
                     <td>
                       <Tagging label={item.Tag} />
                     </td>
