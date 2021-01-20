@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Table from "./Table";
+import CompletedTable from "./CompletedTable";
 
 class Form extends Component {
   constructor(props) {
@@ -90,8 +91,10 @@ class Form extends Component {
 
     const check = this.state.stage;
     let result;
-    if (check == "Index") {
+    if (check == "Index" && this.props.from == "todo") {
       result = <Table username={this.props.username} />;
+    } else if (check == "Index" && this.props.from == "completed") {
+      result = <CompletedTable username={this.props.username} />;
     } else {
       result = (
         <>

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Display from "./Display";
 import Edit from "./Edit";
-import Tagging from "./Tagging";
-import Back from "./Back";
 
 class ItemsContainer extends Component {
   constructor(props) {
@@ -34,12 +31,15 @@ class ItemsContainer extends Component {
   }
 
   render() {
-    const currentPage = window.location.href;
-    const currentID = currentPage.substr(38);
+    let header = this.props.done
+      ? "Completed Items with Tag: "
+      : "To-do List with Tag: ";
     return (
       <>
-        <h1>Items with Tag: {currentID}</h1>
-        <Back />
+        <h1>
+          {header}
+          {this.props.filter}
+        </h1>
         <br />
         <br />
         <div>
@@ -49,6 +49,7 @@ class ItemsContainer extends Component {
                 <th>Date (DD/MM/YYYY)</th>
                 <th>Time</th>
                 <th>Title</th>
+                <th>Details</th>
                 <th>Tag</th>
                 <th>Done?</th>
                 <th colSpan="3"></th>
@@ -56,7 +57,12 @@ class ItemsContainer extends Component {
             </thead>
 
             {this.state.items
-              .filter((item) => item.Tag == currentID)
+              .filter(
+                (item) =>
+                  item.Tag == this.props.filter &&
+                  item.user_name == this.props.username &&
+                  item.Done == this.props.done
+              )
               .map((x) => {
                 return (
                   <tbody key={x.id}>
@@ -66,12 +72,9 @@ class ItemsContainer extends Component {
                         {x.Date.substr(0, 4)}
                       </td>
                       <td>{x.Time.substr(11, 5)}</td>
-                      <td>
-                        <Display title={x.Title} number={x.id.toString()} />
-                      </td>
-                      <td>
-                        <Tagging label={x.Tag} />
-                      </td>
+                      <td>{x.Title}</td>
+                      <td>{x.Details}</td>
+                      <td>{x.Tag}</td>
                       <td>{x.Done.toString()}</td>
                       <td>
                         <Edit number={x.id} />

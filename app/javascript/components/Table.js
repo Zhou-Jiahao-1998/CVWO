@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Edit from "./Edit";
-import Tagging from "./Tagging";
 import Form from "./Form";
 import EditForm from "./EditForm";
+import FilteredTable from "./FilteredTable";
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -45,6 +44,7 @@ class ItemsContainer extends Component {
       user: this.props.username,
       stage: "Index",
       itemID: 0,
+      filter: "",
     };
     this.getItems();
   }
@@ -82,10 +82,22 @@ class ItemsContainer extends Component {
     this.setState({ stage: "Create" });
   }
 
+  goTag(tag) {
+    this.setState({ filter: tag });
+  }
+
   render() {
     const check = this.state.stage;
     let result;
-    if (check == "Index") {
+    if (this.state.filter != "") {
+      result = (
+        <FilteredTable
+          username={this.props.username}
+          filter={this.state.filter}
+          done={false}
+        />
+      );
+    } else if (check == "Index") {
       result = (
         <>
           <div>
@@ -161,7 +173,13 @@ class ItemsContainer extends Component {
                         <td>{item.Title}</td>
                         <td>{item.Details}</td>
                         <td>
-                          <Tagging label={item.Tag} />
+                          <button
+                            type="button"
+                            class="btn btn-link"
+                            onClick={() => this.goTag(item.Tag)}
+                          >
+                            {item.Tag}
+                          </button>
                         </td>
                         {overDue(
                           Number(item.Date.substr(0, 4)),
@@ -203,10 +221,14 @@ class ItemsContainer extends Component {
         </>
       );
     } else if (check == "Create") {
-      result = <Form username={this.props.username} />;
+      result = <Form username={this.props.username} from="todo" />;
     } else if (check == "Edit") {
       result = (
-        <EditForm username={this.props.username} itemID={this.state.itemID} />
+        <EditForm
+          username={this.props.username}
+          itemID={this.state.itemID}
+          from="todo"
+        />
       );
     }
     return result;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Table from "./Table";
+import CompletedTable from "./CompletedTable";
 
 function oneToN(n) {
   const result = [];
@@ -220,8 +221,10 @@ class EditForm extends Component {
           </button>
         </>
       );
-    } else {
+    } else if (check == "Index" && this.props.from == "todo") {
       result = <Table username={this.props.username} />;
+    } else if (check == "Index" && this.props.from == "completed") {
+      result = <CompletedTable username={this.props.username} />;
     }
     return result;
   }
