@@ -43,8 +43,10 @@ class Form extends Component {
     this.insertData(result);
   }
 
-  insertData(data) {
-    axios.post(`/api/v1/items.json`, data).then((res) => console.log(res));
+  async insertData(data) {
+    await axios
+      .post(`/api/v1/items.json`, data)
+      .then((res) => console.log(res));
     this.goShow();
   }
 

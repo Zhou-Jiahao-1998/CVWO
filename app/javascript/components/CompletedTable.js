@@ -33,9 +33,9 @@ class CompletedTable extends Component {
     this.getItems();
   }
 
-  deleteItem(id) {
+  async deleteItem(id) {
     if (window.confirm("Are you sure you want to delete this entry?")) {
-      axios.delete(`/api/v1/items/${id}`);
+      await axios.delete(`/api/v1/items/${id}`);
       this.getItems();
     }
   }
@@ -73,13 +73,6 @@ class CompletedTable extends Component {
       result = (
         <>
           <h1>Completed Items</h1>
-          <a
-            className="btn btn-outline-primary"
-            role="button"
-            onClick={() => this.getItems()}
-          >
-            refresh
-          </a>
           <a
             className="btn btn-outline-primary"
             role="button"

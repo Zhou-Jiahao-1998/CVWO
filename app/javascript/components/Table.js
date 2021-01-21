@@ -62,9 +62,9 @@ class ItemsContainer extends Component {
     this.getItems();
   }
 
-  deleteItem(id) {
+  async deleteItem(id) {
     if (window.confirm("Are you sure you want to delete this entry?")) {
-      axios.delete(`/api/v1/items/${id}`);
+      await axios.delete(`/api/v1/items/${id}`);
       this.getItems();
     }
   }
@@ -102,13 +102,6 @@ class ItemsContainer extends Component {
         <>
           <div>
             <h1>{this.props.username}'s To-do List</h1>
-            <a
-              className="btn btn-outline-primary"
-              role="button"
-              onClick={() => this.getItems()}
-            >
-              refresh
-            </a>
             <a
               className="btn btn-outline-primary"
               role="button"

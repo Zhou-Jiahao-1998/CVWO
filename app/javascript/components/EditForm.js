@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Table from "./Table";
 import CompletedTable from "./CompletedTable";
+import FilteredTable from "./FilteredTable";
 
 function oneToN(n) {
   const result = [];
@@ -85,8 +86,10 @@ class EditForm extends Component {
     this.insertData(result, id);
   }
 
-  insertData(data, id) {
-    axios.patch(`/api/v1/items/${id}`, data).then((res) => console.log(res));
+  async insertData(data, id) {
+    await axios
+      .patch(`/api/v1/items/${id}`, data)
+      .then((res) => console.log(res));
     this.goShow();
   }
 
@@ -225,6 +228,14 @@ class EditForm extends Component {
       result = <Table username={this.props.username} />;
     } else if (check == "Index" && this.props.from == "completed") {
       result = <CompletedTable username={this.props.username} />;
+    } else if (check == "Index" && this.props.from == "filtered") {
+      result = (
+        <FilteredTable
+          username={this.props.username}
+          filter={this.props.tag}
+          done={this.props.done}
+        />
+      );
     }
     return result;
   }
