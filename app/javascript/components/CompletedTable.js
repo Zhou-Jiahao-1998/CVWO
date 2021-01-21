@@ -91,7 +91,6 @@ class CompletedTable extends Component {
                   <th>Title</th>
                   <th>Details</th>
                   <th>Tag</th>
-                  <th>Done?</th>
                   <th colSpan="3"></th>
                 </tr>
               </thead>
@@ -122,7 +121,6 @@ class CompletedTable extends Component {
                             {item.Tag}
                           </button>
                         </td>
-                        <td>{item.Done.toString()}</td>
                         <td>
                           <a
                             className="btn btn-outline-success"

@@ -117,7 +117,6 @@ class ItemsContainer extends Component {
                   <th>Title</th>
                   <th>Details</th>
                   <th>Tag</th>
-                  <th>Done?</th>
                   <th colSpan="3"></th>
                 </tr>
               </thead>
@@ -196,17 +195,6 @@ class ItemsContainer extends Component {
                         ) : (
                           <td>{x.Tag}</td>
                         )}
-                        {overDue(
-                          Number(x.Date.substr(0, 4)),
-                          Number(x.Date.substr(5, 2)),
-                          Number(x.Date.substr(8, 2)),
-                          Number(x.Time.substr(11, 2)),
-                          Number(x.Time.substr(14, 2))
-                        ) ? (
-                          <td className="text-danger">{x.Done.toString()}</td>
-                        ) : (
-                          <td>{x.Done.toString()}</td>
-                        )}
                         <td>
                           <a
                             className="btn btn-outline-success"
@@ -265,7 +253,6 @@ class ItemsContainer extends Component {
                   <th>Title</th>
                   <th>Details</th>
                   <th>Tag</th>
-                  <th>Done?</th>
                   <th colSpan="3"></th>
                 </tr>
               </thead>
@@ -290,7 +277,6 @@ class ItemsContainer extends Component {
                         <td>{x.Title}</td>
                         <td>{x.Details}</td>
                         <td>{x.Tag}</td>
-                        <td>{x.Done.toString()}</td>
                         <td>
                           <a
                             className="btn btn-outline-success"

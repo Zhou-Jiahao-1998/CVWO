@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import CombinedList from "./CombinedList";
+import Table from "./Table";
+import CompletedTable from "./CompletedTable";
 
 class OverallContainer extends Component {
   constructor(props) {
     super(props);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.state = { logins: [], isLoggedin: false, user: "" };
+    this.turnSwitch = this.turnSwitch.bind(this);
+    this.state = { logins: [], isLoggedin: false, user: "", listSwitch: true };
     this.getLogins();
   }
 
@@ -55,60 +57,156 @@ class OverallContainer extends Component {
     }
   }
 
+  turnSwitch() {
+    if (this.state.listSwitch) {
+      this.setState({ listSwitch: false });
+    } else {
+      this.setState({ listSwitch: true });
+    }
+  }
+
   render() {
     const check = this.state.isLoggedin;
     let result;
     if (check == false) {
       result = (
         <>
-          <h1>Please sign in</h1>
-          <form>
-            <div className="form-row">
-              <div className="form-group col-md-3">
-                <label>Username:</label>
-                <input
-                  type="username"
-                  className="form-control"
-                  id="inputname"
-                  placeholder="Username"
-                ></input>
-              </div>
-              <div className="form-group col-md-3">
-                <label>Password:</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="inputpassword"
-                  placeholder="Password"
-                ></input>
-              </div>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a className="navbar-brand">My App</a>
+
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <a className="nav-link active" aria-current="page">
+                    Sign up
+                  </a>
+                </li>
+              </ul>
             </div>
-          </form>
-          <button
-            className="btn btn-primary"
-            type="submit"
-            onClick={() =>
-              this.redirect(
-                document.getElementById("inputname").value,
-                document.getElementById("inputpassword").value
-              )
-            }
-          >
-            Sign in
-          </button>
+          </nav>
+          <div class="container">
+            <br />
+            <h1>Please sign in</h1>
+            <form>
+              <div className="form-row">
+                <div className="form-group col-md-3">
+                  <label>Username:</label>
+                  <input
+                    type="username"
+                    className="form-control"
+                    id="inputname"
+                    placeholder="Username"
+                  ></input>
+                </div>
+                <div className="form-group col-md-3">
+                  <label>Password:</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="inputpassword"
+                    placeholder="Password"
+                  ></input>
+                </div>
+              </div>
+            </form>
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={() =>
+                this.redirect(
+                  document.getElementById("inputname").value,
+                  document.getElementById("inputpassword").value
+                )
+              }
+            >
+              Sign in
+            </button>
+          </div>
         </>
       );
-    } else {
+    } else if (this.state.listSwitch) {
       result = (
         <>
-          <a
-            className="btn btn-outline-primary"
-            role="button"
-            onClick={() => this.logout()}
-          >
-            Log Out
-          </a>
-          <CombinedList username={this.state.user} />
+          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a className="navbar-brand">My App</a>
+
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <a
+                    className="nav-link active"
+                    role="button"
+                    onClick={() => this.turnSwitch()}
+                  >
+                    Completed Items
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className="nav-link active"
+                    role="button"
+                    onClick={() => this.logout()}
+                  >
+                    Log Out
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link active">Edit Account</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="container">
+            <br />
+            <Table username={this.state.user} />
+          </div>
+        </>
+      );
+    } else if (!this.state.listSwitch) {
+      result = (
+        <>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a className="navbar-brand">My App</a>
+
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <a
+                    className="nav-link active"
+                    role="button"
+                    onClick={() => this.turnSwitch()}
+                  >
+                    To-do List
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className="nav-link active"
+                    role="button"
+                    onClick={() => this.logout()}
+                  >
+                    Log Out
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link active">Edit Account</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="container">
+            <br />
+            <CompletedTable username={this.state.user} />
+          </div>
         </>
       );
     }
