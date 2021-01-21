@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import EditForm from "./EditForm";
-import Table from "./Table";
-import CompletedTable from "./CompletedTable";
-import FullTag from "./FullTag";
+import FilteredTable from "./FilteredTable";
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -11,9 +9,10 @@ const currentMonth = today.getMonth() + 1;
 const currentDay = today.getDate();
 const currentHour = today.getHours();
 const currentMin = today.getMinutes();
-
-function overDue(year, month, day, hour, minute) {
-  return year < currentYear
+function overDue(state, year, month, day, hour, minute) {
+  return state
+    ? false
+    : year < currentYear
     ? true
     : year > currentYear
     ? false
@@ -38,6 +37,7 @@ class ItemsContainer extends Component {
   constructor(props) {
     super(props);
     this.goEdit = this.goEdit.bind(this);
+    this.goBack = this.goBack.bind(this);
     this.state = {
       items: [],
       stage: "Index",
@@ -75,21 +75,13 @@ class ItemsContainer extends Component {
     this.setState({ stage: "Back" });
   }
 
-  goFullTag() {
-    this.setState({ stage: "Full" });
-  }
-
   render() {
-    let header = this.props.done
-      ? "Completed Items with Tag: "
-      : "To-do List with Tag: ";
-
     let result;
-    if (this.state.stage == "Index" && !this.props.done) {
+    if (this.state.stage == "Index") {
       result = (
         <>
           <h1>
-            {header}
+            Full list with Tag:
             {this.props.filter}
           </h1>
           <a
@@ -98,13 +90,6 @@ class ItemsContainer extends Component {
             onClick={() => this.goBack()}
           >
             Back
-          </a>
-          <a
-            className="btn btn-outline-primary"
-            role="button"
-            onClick={() => this.goFullTag()}
-          >
-            All items with this Tag
           </a>
           <br />
           <br />
@@ -123,17 +108,18 @@ class ItemsContainer extends Component {
               </thead>
 
               {this.state.items
+                .reverse()
                 .filter(
                   (item) =>
                     item.Tag == this.props.filter &&
-                    item.user_name == this.props.username &&
-                    item.Done == this.props.done
+                    item.user_name == this.props.username
                 )
                 .map((x) => {
                   return (
                     <tbody key={x.id}>
                       <tr>
                         {overDue(
+                          x.Done,
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
                           Number(x.Date.substr(8, 2)),
@@ -151,6 +137,7 @@ class ItemsContainer extends Component {
                           </td>
                         )}
                         {overDue(
+                          x.Done,
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
                           Number(x.Date.substr(8, 2)),
@@ -164,6 +151,7 @@ class ItemsContainer extends Component {
                           <td>{x.Time.substr(11, 5)}</td>
                         )}
                         {overDue(
+                          x.Done,
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
                           Number(x.Date.substr(8, 2)),
@@ -175,6 +163,7 @@ class ItemsContainer extends Component {
                           <td>{x.Title}</td>
                         )}
                         {overDue(
+                          x.Done,
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
                           Number(x.Date.substr(8, 2)),
@@ -186,6 +175,7 @@ class ItemsContainer extends Component {
                           <td>{x.Details}</td>
                         )}
                         {overDue(
+                          x.Done,
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
                           Number(x.Date.substr(8, 2)),
@@ -197,6 +187,7 @@ class ItemsContainer extends Component {
                           <td>{x.Tag}</td>
                         )}
                         {overDue(
+                          x.Done,
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
                           Number(x.Date.substr(8, 2)),
@@ -233,112 +224,32 @@ class ItemsContainer extends Component {
           </div>
         </>
       );
-    } else if (this.state.stage == "Index" && this.props.done) {
-      result = (
-        <>
-          <h1>
-            {header}
-            {this.props.filter}
-          </h1>
-          <a
-            className="btn btn-outline-primary"
-            role="button"
-            onClick={() => this.goBack()}
-          >
-            Back
-          </a>
-          <a
-            className="btn btn-outline-primary"
-            role="button"
-            onClick={() => this.goFullTag()}
-          >
-            All items with this Tag
-          </a>
-          <br />
-          <br />
-          <div>
-            <table className="table">
-              <thead className="thead-light">
-                <tr>
-                  <th>Date (DD/MM/YYYY)</th>
-                  <th>Time</th>
-                  <th>Title</th>
-                  <th>Details</th>
-                  <th>Tag</th>
-                  <th>Done?</th>
-                  <th colSpan="3"></th>
-                </tr>
-              </thead>
-
-              {this.state.items
-                .reverse()
-                .filter(
-                  (item) =>
-                    item.Tag == this.props.filter &&
-                    item.user_name == this.props.username &&
-                    item.Done == this.props.done
-                )
-                .map((x) => {
-                  return (
-                    <tbody key={x.id}>
-                      <tr>
-                        <td>
-                          {x.Date.substr(8, 2)}/{x.Date.substr(5, 2)}/
-                          {x.Date.substr(0, 4)}
-                        </td>
-                        <td>{x.Time.substr(11, 5)}</td>
-                        <td>{x.Title}</td>
-                        <td>{x.Details}</td>
-                        <td>{x.Tag}</td>
-                        <td>{x.Done.toString()}</td>
-                        <td>
-                          <a
-                            className="btn btn-outline-success"
-                            role="button"
-                            onClick={() => this.goEdit(x.id)}
-                          >
-                            Edit
-                          </a>
-                        </td>
-                        <td>
-                          <a
-                            className="btn btn-outline-danger"
-                            role="button"
-                            onClick={() => this.deleteItem(x.id)}
-                          >
-                            Delete
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
-            </table>
-          </div>
-        </>
-      );
     } else if (this.state.stage == "Edit") {
       result = (
         <EditForm
           username={this.props.username}
           itemID={this.state.itemID}
-          from="filtered"
+          from="full"
           tag={this.props.filter}
           done={this.props.done}
         />
       );
-    } else if (this.state.stage == "Full") {
+    } else if (this.props.done) {
       result = (
-        <FullTag
+        <FilteredTable
           username={this.props.username}
           filter={this.props.filter}
-          done={this.props.done}
+          done={true}
         />
       );
-    } else if (this.props.done) {
-      result = <CompletedTable username={this.props.username} />;
     } else {
-      result = <Table username={this.props.username} />;
+      result = (
+        <FilteredTable
+          username={this.props.username}
+          filter={this.props.filter}
+          done={false}
+        />
+      );
     }
     return result;
   }

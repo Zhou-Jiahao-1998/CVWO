@@ -142,7 +142,7 @@ class ItemsContainer extends Component {
                         ) ? (
                           <td className="text-danger">
                             {item.Date.substr(8, 2)}/{item.Date.substr(5, 2)}/
-                            {item.Date.substr(0, 4)}
+                            {item.Date.substr(0, 4)} (Overdue)
                           </td>
                         ) : (
                           <td>
@@ -163,8 +163,28 @@ class ItemsContainer extends Component {
                         ) : (
                           <td>{item.Time.substr(11, 5)}</td>
                         )}
-                        <td>{item.Title}</td>
-                        <td>{item.Details}</td>
+                        {overDue(
+                          Number(item.Date.substr(0, 4)),
+                          Number(item.Date.substr(5, 2)),
+                          Number(item.Date.substr(8, 2)),
+                          Number(item.Time.substr(11, 2)),
+                          Number(item.Time.substr(14, 2))
+                        ) ? (
+                          <td className="text-danger">{item.Title}</td>
+                        ) : (
+                          <td>{item.Title}</td>
+                        )}
+                        {overDue(
+                          Number(item.Date.substr(0, 4)),
+                          Number(item.Date.substr(5, 2)),
+                          Number(item.Date.substr(8, 2)),
+                          Number(item.Time.substr(11, 2)),
+                          Number(item.Time.substr(14, 2))
+                        ) ? (
+                          <td className="text-danger">{item.Details}</td>
+                        ) : (
+                          <td>{item.Details}</td>
+                        )}
                         <td>
                           <button
                             type="button"

@@ -3,6 +3,7 @@ import axios from "axios";
 import Table from "./Table";
 import CompletedTable from "./CompletedTable";
 import FilteredTable from "./FilteredTable";
+import FullTag from "./FullTag";
 
 function oneToN(n) {
   const result = [];
@@ -43,7 +44,7 @@ const monthConvert = {
 };
 const helperYear = oneToN(10).map((x) => x + 2020);
 const helperHour = oneToN(24);
-const helperMin = oneToN(60);
+const helperMin = oneToN(12);
 
 class EditForm extends Component {
   constructor(props) {
@@ -147,7 +148,7 @@ class EditForm extends Component {
                     <select id="inputMin" className="form-control">
                       <option defaultValue>{x.Time.substr(14, 2)}</option>
                       {helperMin.map((y) => (
-                        <option key={y}>{y - 1}</option>
+                        <option key={y}>{(y - 1) * 5}</option>
                       ))}
                     </select>
                   </div>
@@ -222,6 +223,15 @@ class EditForm extends Component {
           >
             Update
           </button>
+          <br />
+          <br />
+          <button
+            className="btn btn-danger"
+            type="submit"
+            onClick={() => this.goShow()}
+          >
+            Cancel
+          </button>
         </>
       );
     } else if (check == "Index" && this.props.from == "todo") {
@@ -231,6 +241,14 @@ class EditForm extends Component {
     } else if (check == "Index" && this.props.from == "filtered") {
       result = (
         <FilteredTable
+          username={this.props.username}
+          filter={this.props.tag}
+          done={this.props.done}
+        />
+      );
+    } else {
+      result = (
+        <FullTag
           username={this.props.username}
           filter={this.props.tag}
           done={this.props.done}

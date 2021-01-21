@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :logins
-  get 'home/index'
-  get 'home/about'
-  get 'home/filter'
   root 'home#index'
   namespace :api do
     namespace :v1 do
@@ -15,5 +11,6 @@ Rails.application.routes.draw do
     end
   end
   resources :items
+  resources :logins
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
