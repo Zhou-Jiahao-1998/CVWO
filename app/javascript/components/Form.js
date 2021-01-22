@@ -107,7 +107,7 @@ class Form extends Component {
                   id="inputDay"
                   className="form-control"
                   required
-                  value={currentDay}
+                  defaultValue={currentDay}
                 >
                   {helperDay.map((x) => (
                     <option key={x}>{x}</option>
@@ -119,7 +119,7 @@ class Form extends Component {
                 <select
                   id="inputMonth"
                   className="form-control"
-                  value={currentMonth}
+                  defaultValue={currentMonth}
                 >
                   {helperMonth.map((x) => (
                     <option key={x}>{x}</option>
@@ -130,7 +130,7 @@ class Form extends Component {
                 <select
                   id="inputYear"
                   className="form-control"
-                  value={currentYear}
+                  defaultValue={currentYear}
                 >
                   {helperYear.map((x) => (
                     <option key={x}>{x}</option>
@@ -144,7 +144,7 @@ class Form extends Component {
                 <select
                   id="inputHour"
                   className="form-control"
-                  value={currentHour}
+                  defaultValue={currentHour}
                 >
                   {helperHour.map((x) => (
                     <option key={x}>{x - 1}</option>
