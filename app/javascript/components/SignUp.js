@@ -68,7 +68,7 @@ class SignUp extends Component {
             <h1>Please sign up</h1>
             <h4>
               Note: This website is built from scratch. Please avoid using real
-              email adresses and password!
+              email addresses and password!
             </h4>
             <form>
               <div className="form-row">
