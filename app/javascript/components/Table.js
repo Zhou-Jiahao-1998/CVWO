@@ -101,7 +101,7 @@ class ItemsContainer extends Component {
       result = (
         <>
           <div>
-            <h1>{this.props.username}'s To-do List</h1>
+            <h1>To-do List</h1>
             <a
               className="btn btn-outline-primary"
               role="button"

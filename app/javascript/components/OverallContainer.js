@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Table from "./Table";
 import CompletedTable from "./CompletedTable";
+import SignUp from "./SignUp";
 
 class OverallContainer extends Component {
   constructor(props) {
@@ -9,7 +10,13 @@ class OverallContainer extends Component {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.turnSwitch = this.turnSwitch.bind(this);
-    this.state = { logins: [], isLoggedin: false, user: "", listSwitch: true };
+    this.state = {
+      logins: [],
+      isLoggedin: false,
+      user: "",
+      listSwitch: true,
+      signUp: false,
+    };
     this.getLogins();
   }
 
@@ -34,6 +41,10 @@ class OverallContainer extends Component {
     this.setState({ isLoggedin: false });
   }
 
+  signup() {
+    this.setState({ signUp: true });
+  }
+
   verify(username, code) {
     const result = this.state.logins.filter((x) => x.name == username);
 
@@ -49,6 +60,7 @@ class OverallContainer extends Component {
   redirect(username, code) {
     if (this.verify(username, code) == 1) {
       alert("No such username. Please sign up!");
+      this.signup();
     } else if (this.verify(username, code) == 2) {
       this.setState({ user: username });
       this.setState({ isLoggedin: true });
@@ -68,11 +80,17 @@ class OverallContainer extends Component {
   render() {
     const check = this.state.isLoggedin;
     let result;
-    if (check == false) {
+    if (this.state.signUp) {
+      result = (
+        <>
+          <SignUp />
+        </>
+      );
+    } else if (check == false) {
       result = (
         <>
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand">My App</a>
+            <a className="navbar-brand">Jiahao's App</a>
 
             <div
               className="collapse navbar-collapse"
@@ -80,7 +98,12 @@ class OverallContainer extends Component {
             >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page">
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    role="button"
+                    onClick={() => this.signup()}
+                  >
                     Sign up
                   </a>
                 </li>
@@ -131,7 +154,7 @@ class OverallContainer extends Component {
       result = (
         <>
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand">My App</a>
+            <a className="navbar-brand">Jiahao's App</a>
 
             <div
               className="collapse navbar-collapse"
@@ -147,6 +170,11 @@ class OverallContainer extends Component {
                     Completed Items
                   </a>
                 </li>
+              </ul>
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a className="nav-link active">Hi {this.state.user}!</a>
+                </li>
                 <li className="nav-item">
                   <a
                     className="nav-link active"
@@ -155,9 +183,6 @@ class OverallContainer extends Component {
                   >
                     Log Out
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active">Edit Account</a>
                 </li>
               </ul>
             </div>
@@ -172,7 +197,7 @@ class OverallContainer extends Component {
       result = (
         <>
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand">My App</a>
+            <a className="navbar-brand">Jiahao's App</a>
 
             <div
               className="collapse navbar-collapse"
@@ -188,6 +213,11 @@ class OverallContainer extends Component {
                     To-do List
                   </a>
                 </li>
+              </ul>
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <a className="nav-link active">Hi {this.state.user}!</a>
+                </li>
                 <li className="nav-item">
                   <a
                     className="nav-link active"
@@ -196,9 +226,6 @@ class OverallContainer extends Component {
                   >
                     Log Out
                   </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active">Edit Account</a>
                 </li>
               </ul>
             </div>
