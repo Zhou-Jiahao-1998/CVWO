@@ -110,7 +110,7 @@ class OverallContainer extends Component {
               </ul>
             </div>
           </nav>
-          <div class="container">
+          <div className="container">
             <br />
             <h1>Please sign in</h1>
             <form>
@@ -187,7 +187,7 @@ class OverallContainer extends Component {
               </ul>
             </div>
           </nav>
-          <div class="container">
+          <div className="container">
             <br />
             <Table username={this.state.user} />
           </div>
@@ -230,7 +230,7 @@ class OverallContainer extends Component {
               </ul>
             </div>
           </nav>
-          <div class="container">
+          <div className="container">
             <br />
             <CompletedTable username={this.state.user} />
           </div>

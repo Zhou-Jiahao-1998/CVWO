@@ -64,7 +64,7 @@ class SignUp extends Component {
             <a className="navbar-brand">Jiahao's App</a>
           </nav>
           <br />
-          <div class="container">
+          <div className="container">
             <h1>Please sign up</h1>
             <h4>
               Note: This website is built from scratch. Please avoid using real

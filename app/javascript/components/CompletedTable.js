@@ -115,7 +115,7 @@ class CompletedTable extends Component {
                         <td>
                           <button
                             type="button"
-                            class="btn btn-link"
+                            className="btn btn-link"
                             onClick={() => this.goTag(item.Tag)}
                           >
                             {item.Tag}
