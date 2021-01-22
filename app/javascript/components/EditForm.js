@@ -42,9 +42,11 @@ const monthConvert = {
   Nov: "11",
   Dec: "12",
 };
-const helperYear = oneToN(10).map((x) => x + 2020);
+const today = new Date();
+const currentYear = today.getFullYear();
+const helperYear = oneToN(10).map((x) => x + currentYear - 5);
 const helperHour = oneToN(24);
-const helperMin = oneToN(12);
+const helperMin = oneToN(10);
 
 class EditForm extends Component {
   constructor(props) {
@@ -108,26 +110,36 @@ class EditForm extends Component {
                 <label>Date:</label>
                 <div className="form-row">
                   <div className="form-group col-md-1">
-                    <select id="inputDay" className="form-control" required>
-                      <option defaultValue>{x.Date.substr(8, 2)}</option>
+                    <select
+                      id="inputDay"
+                      className="form-control"
+                      required
+                      defaultValue={x.Date.substr(8, 2)}
+                    >
                       {helperDay.map((y) => (
                         <option key={y}>{y}</option>
                       ))}
                     </select>
                   </div>
                   <div className="form-group col-md-1">
-                    <select id="inputMonth" className="form-control">
-                      <option defaultValue>
-                        {helperMonth[Number(x.Date.substr(5, 2)) - 1]}
-                      </option>
+                    <select
+                      id="inputMonth"
+                      className="form-control"
+                      defaultValue={
+                        helperMonth[Number(x.Date.substr(5, 2)) - 1]
+                      }
+                    >
                       {helperMonth.map((y) => (
                         <option key={y}>{y}</option>
                       ))}
                     </select>
                   </div>
                   <div className="form-group col-md-1">
-                    <select id="inputYear" className="form-control">
-                      <option defaultValue>{x.Date.substr(0, 4)}</option>
+                    <select
+                      id="inputYear"
+                      className="form-control"
+                      defaultValue={x.Date.substr(0, 4)}
+                    >
                       {helperYear.map((y) => (
                         <option key={y}>{y}</option>
                       ))}
@@ -137,18 +149,26 @@ class EditForm extends Component {
                 <label>Time (24hr):</label>
                 <div className="form-row">
                   <div className="form-group col-md-1">
-                    <select id="inputHour" className="form-control">
-                      <option defaultValue>{x.Time.substr(11, 2)}</option>
+                    <select
+                      id="inputHour"
+                      className="form-control"
+                      defaultValue={x.Time.substr(11, 2)}
+                    >
                       {helperHour.map((y) => (
                         <option key={y}>{y - 1}</option>
                       ))}
                     </select>
                   </div>
                   <div className="form-group col-md-1">
-                    <select id="inputMin" className="form-control">
-                      <option defaultValue>{x.Time.substr(14, 2)}</option>
+                    <select
+                      id="inputMin"
+                      className="form-control"
+                      defaultValue={x.Time.substr(14, 2)}
+                    >
+                      <option key="00">00</option>
+                      <option key="00">05</option>
                       {helperMin.map((y) => (
-                        <option key={y}>{(y - 1) * 5}</option>
+                        <option key={y}>{(y + 1) * 5}</option>
                       ))}
                     </select>
                   </div>
@@ -205,15 +225,9 @@ class EditForm extends Component {
                   document.getElementById("inputDay").value,
                   document.getElementById("inputHour").value,
                   document.getElementById("inputMin").value,
-                  document.getElementById("inputTitle").value == ""
-                    ? document.getElementById("inputTitle").placeholder
-                    : document.getElementById("inputTitle").value,
-                  document.getElementById("inputDetail").value == ""
-                    ? document.getElementById("inputDetail").placeholder
-                    : document.getElementById("inputDetail").value,
-                  document.getElementById("inputTag").value == ""
-                    ? document.getElementById("inputTag").placeholder
-                    : document.getElementById("inputTag").value,
+                  document.getElementById("inputTitle").value,
+                  document.getElementById("inputDetail").value,
+                  document.getElementById("inputTag").value,
                   document.getElementById("inputDone").value,
                 ],
                 this.props.itemID

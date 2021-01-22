@@ -88,7 +88,7 @@ class Form extends Component {
 
     const helperYear = this.oneToN(10).map((x) => currentYear - 5 + x);
     const helperHour = this.oneToN(24);
-    const helperMin = this.oneToN(11);
+    const helperMin = this.oneToN(10);
 
     const check = this.state.stage;
     let result;
@@ -153,9 +153,10 @@ class Form extends Component {
               </div>
               <div className="form-group col-md-1">
                 <select id="inputMin" className="form-control">
-                  <option defaultValue>0</option>
+                  <option defaultValue>00</option>
+                  <option key="05">05</option>
                   {helperMin.map((x) => (
-                    <option key={x}>{x * 5}</option>
+                    <option key={x}>{(x + 1) * 5}</option>
                   ))}
                 </select>
               </div>
