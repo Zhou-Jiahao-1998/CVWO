@@ -51,8 +51,9 @@ class Form extends Component {
   }
 
   render() {
-    const helperDay = this.oneToN(30);
+    const helperDay = this.oneToN(31);
     const helperMonth = [
+      "Jan",
       "Feb",
       "Mar",
       "Apr",
@@ -81,9 +82,12 @@ class Form extends Component {
     };
     const today = new Date();
     const currentYear = today.getFullYear();
+    const currentMonth = helperMonth[today.getMonth()];
+    const currentDay = today.getDate();
+    const currentHour = today.getHours();
 
-    const helperYear = this.oneToN(10).map((x) => x + currentYear);
-    const helperHour = this.oneToN(23);
+    const helperYear = this.oneToN(10).map((x) => currentYear - 5 + x);
+    const helperHour = this.oneToN(24);
     const helperMin = this.oneToN(11);
 
     const check = this.state.stage;
@@ -99,25 +103,35 @@ class Form extends Component {
             <label>Date:</label>
             <div className="form-row">
               <div className="form-group col-md-1">
-                <select id="inputDay" className="form-control" required>
-                  <option defaultValue>1</option>
+                <select
+                  id="inputDay"
+                  className="form-control"
+                  required
+                  value={currentDay}
+                >
                   {helperDay.map((x) => (
-                    <option key={x + 1}>{x + 1}</option>
+                    <option key={x}>{x}</option>
                   ))}
                 </select>
                 <div className="invalid-tooltip">Please select a day.</div>
               </div>
               <div className="form-group col-md-1">
-                <select id="inputMonth" className="form-control">
-                  <option defaultValue>Jan</option>
+                <select
+                  id="inputMonth"
+                  className="form-control"
+                  value={currentMonth}
+                >
                   {helperMonth.map((x) => (
                     <option key={x}>{x}</option>
                   ))}
                 </select>
               </div>
               <div className="form-group col-md-1">
-                <select id="inputYear" className="form-control">
-                  <option defaultValue>{currentYear}</option>
+                <select
+                  id="inputYear"
+                  className="form-control"
+                  value={currentYear}
+                >
                   {helperYear.map((x) => (
                     <option key={x}>{x}</option>
                   ))}
@@ -127,10 +141,13 @@ class Form extends Component {
             <label>Time (24hr):</label>
             <div className="form-row">
               <div className="form-group col-md-1">
-                <select id="inputHour" className="form-control">
-                  <option defaultValue>0</option>
+                <select
+                  id="inputHour"
+                  className="form-control"
+                  value={currentHour}
+                >
                   {helperHour.map((x) => (
-                    <option key={x}>{x}</option>
+                    <option key={x}>{x - 1}</option>
                   ))}
                 </select>
               </div>

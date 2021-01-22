@@ -160,7 +160,7 @@ class EditForm extends Component {
                       type="title"
                       className="form-control"
                       id="inputTitle"
-                      placeholder={x.Title}
+                      defaultValue={x.Title}
                     ></input>
                   </div>
                   <div className="form-group col-md-2">
@@ -169,7 +169,7 @@ class EditForm extends Component {
                       type="tag"
                       className="form-control"
                       id="inputTag"
-                      placeholder={x.Tag}
+                      defaultValue={x.Tag}
                     ></input>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ class EditForm extends Component {
                     className="form-control"
                     id="inputDetail"
                     rows="3"
-                    placeholder={x.Details}
+                    defaultValue={x.Details}
                   ></textarea>
                 </div>
                 <label>Done?</label>
@@ -188,8 +188,7 @@ class EditForm extends Component {
                   <div className="form-group col-md-1">
                     <select id="inputDone" className="form-control">
                       <option defaultValue>{x.Done.toString()}</option>
-                      <option key="true">true</option>
-                      <option key="false">false</option>
+                      <option key="else">{(!x.Done).toString()}</option>
                     </select>
                   </div>
                 </div>
