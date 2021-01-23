@@ -4,6 +4,7 @@ import Table from "./Table";
 import CompletedTable from "./CompletedTable";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
 
 class Form extends Component {
   constructor(props) {
