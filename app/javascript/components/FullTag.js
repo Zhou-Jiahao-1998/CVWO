@@ -215,7 +215,9 @@ class ItemsContainer extends Component {
                           Number(x.Time.substr(11, 2)),
                           Number(x.Time.substr(14, 2))
                         ) ? (
-                          <td className="text-danger">{x.Done.toString()}</td>
+                          <td className="text-danger">
+                            {x.Done ? "Yes" : "No"}
+                          </td>
                         ) : (
                           <td>{x.Done ? "Yes" : "No"}</td>
                         )}
