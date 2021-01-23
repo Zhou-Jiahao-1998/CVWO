@@ -44,6 +44,7 @@ class ItemsContainer extends Component {
       items: [],
       stage: "Index",
       itemID: 0,
+      date: null,
     };
     this.getItems();
   }
@@ -68,7 +69,16 @@ class ItemsContainer extends Component {
     }
   }
 
-  goEdit(number) {
+  goEdit(number, date) {
+    let helper = today;
+    helper.setFullYear(
+      Number(date.substr(0, 4)),
+      Number(date.substr(5, 2)) - 1,
+      Number(date.substr(8, 2))
+    );
+    this.setState({
+      date: helper,
+    });
     this.setState({ itemID: number });
     this.setState({ stage: "Edit" });
   }
@@ -225,7 +235,7 @@ class ItemsContainer extends Component {
                           <a
                             className="btn btn-outline-success"
                             role="button"
-                            onClick={() => this.goEdit(x.id)}
+                            onClick={() => this.goEdit(x.id, x.Date)}
                           >
                             Edit
                           </a>
@@ -255,6 +265,7 @@ class ItemsContainer extends Component {
           from="full"
           tag={this.props.filter}
           done={this.props.done}
+          calendar={this.state.date}
         />
       );
     } else if (this.state.stage == "Home") {

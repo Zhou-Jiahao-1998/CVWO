@@ -75,12 +75,14 @@ class ItemsContainer extends Component {
   }
 
   goEdit(number, date) {
+    let helper = today;
+    helper.setFullYear(
+      Number(date.substr(0, 4)),
+      Number(date.substr(5, 2)) - 1,
+      Number(date.substr(8, 2))
+    );
     this.setState({
-      date: new Date().setFullYear(
-        Number(date.substr(0, 4)),
-        Number(date.substr(5, 2)) - 1,
-        Number(date.substr(8, 2))
-      ),
+      date: helper,
     });
     this.setState({ itemID: number });
     this.setState({ stage: "Edit" });

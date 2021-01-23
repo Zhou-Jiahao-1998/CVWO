@@ -4,6 +4,8 @@ import Table from "./Table";
 import CompletedTable from "./CompletedTable";
 import FilteredTable from "./FilteredTable";
 import FullTag from "./FullTag";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function oneToN(n) {
   const result = [];
@@ -13,38 +15,6 @@ function oneToN(n) {
   return result;
 }
 
-const helperDay = oneToN(31);
-const helperMonth = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const monthConvert = {
-  Jan: "01",
-  Feb: "02",
-  Mar: "03",
-  Apr: "04",
-  May: "05",
-  Jun: "06",
-  Jul: "07",
-  Aug: "08",
-  Sep: "09",
-  Oct: "10",
-  Nov: "11",
-  Dec: "12",
-};
-const today = new Date();
-const currentYear = today.getFullYear();
-const helperYear = oneToN(10).map((x) => x + currentYear - 5);
 const helperHour = oneToN(24);
 const helperMin = oneToN(10);
 
@@ -52,10 +22,12 @@ class EditForm extends Component {
   constructor(props) {
     super(props);
     this.goShow = this.goShow.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       items: [],
       user: this.props.username,
       stage: "Edit",
+      startDate: this.props.calendar,
     };
   }
 
@@ -76,14 +48,26 @@ class EditForm extends Component {
     this.setState({ stage: "Index" });
   }
 
+  handleChange(date) {
+    this.setState({
+      startDate: date,
+    });
+  }
+
   packnsend(input, id) {
+    const inputDate = this.state.startDate;
     const result = {
-      Date: input[0] + "-" + input[1] + "-" + input[2],
-      Time: input[3] + ":" + input[4],
-      Title: input[5],
-      Details: input[6],
-      Tag: input[7],
-      Done: input[8],
+      Date:
+        inputDate.getFullYear().toString() +
+        "-" +
+        (inputDate.getMonth() + 1).toString() +
+        "-" +
+        inputDate.getDate().toString(),
+      Time: input[0] + ":" + input[1],
+      Title: input[2],
+      Details: input[3],
+      Tag: input[4],
+      Done: input[5],
       user_name: this.props.username,
     };
     this.insertData(result, id);
@@ -109,42 +93,14 @@ class EditForm extends Component {
               <form key={x.id}>
                 <label>Date:</label>
                 <div className="form-row">
-                  <div className="form-group col-md-1">
-                    <select
-                      id="inputDay"
-                      className="form-control"
-                      required
-                      defaultValue={x.Date.substr(8, 2)}
-                    >
-                      {helperDay.map((y) => (
-                        <option key={y}>{y}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group col-md-1">
-                    <select
-                      id="inputMonth"
-                      className="form-control"
-                      defaultValue={
-                        helperMonth[Number(x.Date.substr(5, 2)) - 1]
-                      }
-                    >
-                      {helperMonth.map((y) => (
-                        <option key={y}>{y}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group col-md-1">
-                    <select
-                      id="inputYear"
-                      className="form-control"
-                      defaultValue={x.Date.substr(0, 4)}
-                    >
-                      {helperYear.map((y) => (
-                        <option key={y}>{y}</option>
-                      ))}
-                    </select>
-                  </div>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    onChange={this.handleChange}
+                    name="startDate"
+                    dateFormat="dd/MM/yyyy"
+                    showYearDropdown
+                    showMonthDropdown
+                  />
                 </div>
                 <label>Time (24hr):</label>
                 <div className="form-row">
@@ -219,9 +175,6 @@ class EditForm extends Component {
             onClick={() =>
               this.packnsend(
                 [
-                  document.getElementById("inputYear").value,
-                  monthConvert[document.getElementById("inputMonth").value],
-                  document.getElementById("inputDay").value,
                   document.getElementById("inputHour").value,
                   document.getElementById("inputMin").value,
                   document.getElementById("inputTitle").value,
