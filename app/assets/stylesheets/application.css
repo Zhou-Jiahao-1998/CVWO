@@ -13,5 +13,4 @@
  *= require_tree .
  *= require_self
  */
-@import "~react-datepicker/dist/react-datepicker.css";
 @import url("https://cdnjs.cloudflare.com/ajax/libs/react-datepicker/2.8.0/react-datepicker.min.css");

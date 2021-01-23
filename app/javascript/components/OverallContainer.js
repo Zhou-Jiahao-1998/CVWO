@@ -158,8 +158,7 @@ class OverallContainer extends Component {
             </button>
             <br />
             <br />
-            <h8>Don't have an account? Sign up here!</h8>
-            <br />
+            <h6>Don't have an account? Sign up here!</h6>
             <button
               className="btn btn-secondary"
               onClick={() => this.setState({ signUp: true })}

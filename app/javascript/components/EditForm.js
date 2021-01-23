@@ -123,7 +123,7 @@ class EditForm extends Component {
                       defaultValue={x.Time.substr(14, 2)}
                     >
                       <option key="00">00</option>
-                      <option key="00">05</option>
+                      <option key="05">05</option>
                       {helperMin.map((y) => (
                         <option key={y}>{(y + 1) * 5}</option>
                       ))}
