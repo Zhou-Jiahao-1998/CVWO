@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import EditForm from "./EditForm";
 import FilteredTable from "./FilteredTable";
+import Table from "./Table";
+import CompletedTable from "./CompletedTable";
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -75,15 +77,16 @@ class ItemsContainer extends Component {
     this.setState({ stage: "Back" });
   }
 
+  goHome() {
+    this.setState({ stage: "Home" });
+  }
+
   render() {
     let result;
     if (this.state.stage == "Index") {
       result = (
         <>
-          <h1>
-            Full list with Tag:
-            {this.props.filter}
-          </h1>
+          <h1>Full list with Tag: {this.props.filter}</h1>
           <a
             className="btn btn-outline-primary"
             role="button"
@@ -91,13 +94,31 @@ class ItemsContainer extends Component {
           >
             Back
           </a>
+          {this.props.done ? (
+            <a
+              className="btn btn-outline-primary"
+              role="button"
+              onClick={() => this.goHome()}
+            >
+              Completed Items
+            </a>
+          ) : (
+            <a
+              className="btn btn-outline-primary"
+              role="button"
+              onClick={() => this.goHome()}
+            >
+              To-do List
+            </a>
+          )}
+
           <br />
           <br />
           <div>
             <table className="table">
               <thead className="thead-light">
                 <tr>
-                  <th>Date (DD/MM/YYYY)</th>
+                  <th>Date</th>
                   <th>Time</th>
                   <th>Title</th>
                   <th>Details</th>
@@ -233,6 +254,12 @@ class ItemsContainer extends Component {
           tag={this.props.filter}
           done={this.props.done}
         />
+      );
+    } else if (this.state.stage == "Home") {
+      result = this.props.done ? (
+        <CompletedTable username={this.props.username} />
+      ) : (
+        <Table username={this.props.username} />
       );
     } else if (this.props.done) {
       result = (

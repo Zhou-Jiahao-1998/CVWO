@@ -112,7 +112,7 @@ class ItemsContainer extends Component {
             <table className="table">
               <thead className="thead-light">
                 <tr>
-                  <th>Date (DD/MM/YYYY)</th>
+                  <th>Date</th>
                   <th>Time</th>
                   <th>Title</th>
                   <th>Details</th>
@@ -248,7 +248,7 @@ class ItemsContainer extends Component {
             <table className="table">
               <thead className="thead-light">
                 <tr>
-                  <th>Date (DD/MM/YYYY)</th>
+                  <th>Date</th>
                   <th>Time</th>
                   <th>Title</th>
                   <th>Details</th>
