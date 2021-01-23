@@ -70,7 +70,6 @@ class EditForm extends Component {
       Details: input[3],
       Tag: input[4],
       Done: input[5],
-      user_name: this.props.username,
     };
     this.insertData(result, id);
   }
