@@ -3,6 +3,9 @@ import axios from "axios";
 import Table from "./Table";
 import CompletedTable from "./CompletedTable";
 import SignUp from "./SignUp";
+import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
+import "react-datepicker/src/stylesheets/datepicker.scss";
 
 class OverallContainer extends Component {
   constructor(props) {

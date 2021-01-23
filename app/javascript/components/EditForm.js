@@ -7,6 +7,7 @@ import FullTag from "./FullTag";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.min.css";
+import "react-datepicker/src/stylesheets/datepicker.scss";
 
 function oneToN(n) {
   const result = [];
