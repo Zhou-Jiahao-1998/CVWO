@@ -217,7 +217,7 @@ class ItemsContainer extends Component {
                         ) ? (
                           <td className="text-danger">{x.Done.toString()}</td>
                         ) : (
-                          <td>{x.Done.toString()}</td>
+                          <td>{x.Done ? "Yes" : "No"}</td>
                         )}
                         <td>
                           <a

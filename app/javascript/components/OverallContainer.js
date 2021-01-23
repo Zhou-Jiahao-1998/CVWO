@@ -161,7 +161,6 @@ class OverallContainer extends Component {
             <br />
             <button
               className="btn btn-secondary"
-              type="submit"
               onClick={() => this.setState({ signUp: true })}
             >
               Sign up

@@ -99,6 +99,7 @@ class Form extends Component {
     } else {
       result = (
         <>
+          <h1>Creating New Item</h1>
           <form>
             <label>Date:</label>
             <div className="form-row">
@@ -191,8 +192,7 @@ class Form extends Component {
                 rows="3"
               ></textarea>
             </div>
-            <label>Done?</label>
-            <div className="form-row">
+            <div className="form-row" hidden>
               <div className="form-group col-md-1">
                 <select id="inputDone" className="form-control">
                   <option defaultValue>false</option>

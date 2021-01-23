@@ -204,16 +204,15 @@ class EditForm extends Component {
                   ></textarea>
                 </div>
                 <label>Done?</label>
-                <div className="form-row">
-                  <div className="form-group col-md-1">
-                    <select id="inputDone" className="form-control">
-                      <option defaultValue>{x.Done.toString()}</option>
-                      <option key="else">{(!x.Done).toString()}</option>
-                    </select>
-                  </div>
-                </div>
+                {"  "}
+                <input
+                  type="checkbox"
+                  id="inputDone"
+                  defaultChecked={x.Done}
+                ></input>
               </form>
             ))}
+          <br />
           <button
             className="btn btn-primary"
             type="submit"
@@ -228,7 +227,7 @@ class EditForm extends Component {
                   document.getElementById("inputTitle").value,
                   document.getElementById("inputDetail").value,
                   document.getElementById("inputTag").value,
-                  document.getElementById("inputDone").value,
+                  document.getElementById("inputDone").checked,
                 ],
                 this.props.itemID
               )

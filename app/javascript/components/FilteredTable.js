@@ -79,6 +79,17 @@ class ItemsContainer extends Component {
     this.setState({ stage: "Full" });
   }
 
+  async updateDone(data, id) {
+    if (window.confirm("Are you sure this item is done?")) {
+      await axios
+        .patch(`/api/v1/items/${id}`, data)
+        .then((res) => console.log(res));
+      this.getItems();
+    } else {
+      document.getElementById(id).checked = false;
+    }
+  }
+
   render() {
     let header = this.props.done
       ? "Completed Items with Tag: "
@@ -112,6 +123,7 @@ class ItemsContainer extends Component {
             <table className="table">
               <thead className="thead-light">
                 <tr>
+                  <th></th>
                   <th>Date</th>
                   <th>Time</th>
                   <th>Title</th>
@@ -132,6 +144,16 @@ class ItemsContainer extends Component {
                   return (
                     <tbody key={x.id}>
                       <tr>
+                        <td>
+                          <input
+                            type="checkbox"
+                            id={x.id}
+                            defaultChecked={false}
+                            onClick={() =>
+                              this.updateDone({ Done: true }, x.id)
+                            }
+                          ></input>
+                        </td>
                         {overDue(
                           Number(x.Date.substr(0, 4)),
                           Number(x.Date.substr(5, 2)),
