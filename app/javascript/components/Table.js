@@ -45,6 +45,7 @@ class ItemsContainer extends Component {
       stage: "Index",
       itemID: 0,
       filter: "",
+      date: null,
     };
     this.getItems();
   }
@@ -73,7 +74,14 @@ class ItemsContainer extends Component {
     this.setState({ stage: "Index" });
   }
 
-  goEdit(number) {
+  goEdit(number, date) {
+    this.setState({
+      date: new Date().setFullYear(
+        Number(date.substr(0, 4)),
+        Number(date.substr(5, 2)) - 1,
+        Number(date.substr(8, 2))
+      ),
+    });
     this.setState({ itemID: number });
     this.setState({ stage: "Edit" });
   }
@@ -118,7 +126,7 @@ class ItemsContainer extends Component {
               role="button"
               onClick={() => this.goCreate()}
             >
-              New Items
+              New Item
             </a>
             <br />
             <br />
@@ -219,7 +227,7 @@ class ItemsContainer extends Component {
                           <a
                             className="btn btn-outline-success"
                             role="button"
-                            onClick={() => this.goEdit(item.id)}
+                            onClick={() => this.goEdit(item.id, item.Date)}
                           >
                             Edit
                           </a>
@@ -249,6 +257,7 @@ class ItemsContainer extends Component {
           username={this.props.username}
           itemID={this.state.itemID}
           from="todo"
+          calendar={this.state.date}
         />
       );
     }

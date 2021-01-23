@@ -2,15 +2,19 @@ import React, { Component } from "react";
 import axios from "axios";
 import Table from "./Table";
 import CompletedTable from "./CompletedTable";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Form extends Component {
   constructor(props) {
     super(props);
     this.goShow = this.goShow.bind(this);
     this.goCreate = this.goCreate.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       user: this.props.username,
       stage: "Create",
+      startDate: new Date(),
     };
   }
 
@@ -31,13 +35,19 @@ class Form extends Component {
   }
 
   packnsend(input) {
+    const inputDate = this.state.startDate;
     const result = {
-      Date: input[0] + "-" + input[1] + "-" + input[2],
-      Time: input[3] + ":" + input[4],
-      Title: input[5],
-      Details: input[6],
-      Tag: input[7],
-      Done: input[8],
+      Date:
+        inputDate.getFullYear().toString() +
+        "-" +
+        (inputDate.getMonth() + 1).toString() +
+        "-" +
+        inputDate.getDate().toString(),
+      Time: input[0] + ":" + input[1],
+      Title: input[2],
+      Details: input[3],
+      Tag: input[4],
+      Done: input[5],
       user_name: this.props.username,
     };
     this.insertData(result);
@@ -50,43 +60,16 @@ class Form extends Component {
     this.goShow();
   }
 
+  handleChange(date) {
+    this.setState({
+      startDate: date,
+    });
+  }
+
   render() {
-    const helperDay = this.oneToN(31);
-    const helperMonth = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const monthConvert = {
-      Jan: "01",
-      Feb: "02",
-      Mar: "03",
-      Apr: "04",
-      May: "05",
-      Jun: "06",
-      Jul: "07",
-      Aug: "08",
-      Sep: "09",
-      Oct: "10",
-      Nov: "11",
-      Dec: "12",
-    };
     const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = helperMonth[today.getMonth()];
-    const currentDay = today.getDate();
     const currentHour = today.getHours();
 
-    const helperYear = this.oneToN(10).map((x) => currentYear - 5 + x);
     const helperHour = this.oneToN(24);
     const helperMin = this.oneToN(10);
 
@@ -100,45 +83,20 @@ class Form extends Component {
       result = (
         <>
           <h1>Creating New Item</h1>
+
           <form>
             <label>Date:</label>
             <div className="form-row">
-              <div className="form-group col-md-1">
-                <select
-                  id="inputDay"
-                  className="form-control"
-                  required
-                  defaultValue={currentDay}
-                >
-                  {helperDay.map((x) => (
-                    <option key={x}>{x}</option>
-                  ))}
-                </select>
-                <div className="invalid-tooltip">Please select a day.</div>
-              </div>
-              <div className="form-group col-md-1">
-                <select
-                  id="inputMonth"
-                  className="form-control"
-                  defaultValue={currentMonth}
-                >
-                  {helperMonth.map((x) => (
-                    <option key={x}>{x}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group col-md-1">
-                <select
-                  id="inputYear"
-                  className="form-control"
-                  defaultValue={currentYear}
-                >
-                  {helperYear.map((x) => (
-                    <option key={x}>{x}</option>
-                  ))}
-                </select>
-              </div>
+              <DatePicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+                name="startDate"
+                dateFormat="dd/MM/yyyy"
+                showYearDropdown
+                showMonthDropdown
+              />
             </div>
+            <br />
             <label>Time (24hr):</label>
             <div className="form-row">
               <div className="form-group col-md-1">
@@ -206,9 +164,6 @@ class Form extends Component {
             type="submit"
             onClick={() =>
               this.packnsend([
-                document.getElementById("inputYear").value,
-                monthConvert[document.getElementById("inputMonth").value],
-                document.getElementById("inputDay").value,
                 document.getElementById("inputHour").value,
                 document.getElementById("inputMin").value,
                 document.getElementById("inputTitle").value,
